@@ -1,6 +1,7 @@
 "use client";
 
 import { useTranslations } from "next-intl";
+import { useTheme } from "next-themes";
 import { motion } from "framer-motion";
 import { techStack } from "@/data/tech-stack";
 import * as SimpleIcons from "simple-icons";
@@ -29,6 +30,16 @@ const item = {
 
 export function Skills() {
   const t = useTranslations("skills");
+  const { theme } = useTheme();
+
+  // Function to get appropriate color based on theme
+  const getColor = (originalColor: string) => {
+    // If dark mode and color is black, use white instead
+    if (theme === "dark" && originalColor === "#000000") {
+      return "#FFFFFF";
+    }
+    return originalColor;
+  };
 
   return (
     <section id="skills" className="py-28 md:py-44 bg-muted/50">
@@ -53,6 +64,7 @@ export function Skills() {
                 .charAt(0)
                 .toUpperCase()}${tech.icon.slice(1)}`;
               const icon = (SimpleIcons as any)[iconSlug];
+              const displayColor = getColor(tech.color);
 
               return (
                 <motion.div
@@ -68,7 +80,7 @@ export function Skills() {
                   <div
                     className="flex items-center gap-2 px-4 py-2 rounded-full border-2 shadow-lg hover:shadow-xl transition-all duration-300 cursor-default"
                     style={{
-                      borderColor: tech.color,
+                      borderColor: displayColor,
                       backgroundColor: "hsl(var(--background))",
                     }}
                   >
@@ -77,14 +89,14 @@ export function Skills() {
                         role="img"
                         viewBox="0 0 24 24"
                         className="w-5 h-5 transition-transform group-hover:rotate-12"
-                        style={{ fill: tech.color }}
+                        style={{ fill: displayColor }}
                       >
                         <path d={icon.path} />
                       </svg>
                     )}
                     <span
                       className="font-semibold text-sm whitespace-nowrap"
-                      style={{ color: tech.color }}
+                      style={{ color: displayColor }}
                     >
                       {tech.name}
                     </span>
@@ -93,7 +105,7 @@ export function Skills() {
                   {/* Glow effect on hover */}
                   <div
                     className="absolute inset-0 rounded-full blur-xl opacity-0 group-hover:opacity-30 transition-opacity duration-300 -z-10"
-                    style={{ backgroundColor: tech.color }}
+                    style={{ backgroundColor: displayColor }}
                   />
                 </motion.div>
               );
