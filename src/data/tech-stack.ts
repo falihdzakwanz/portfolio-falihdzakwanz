@@ -29,7 +29,7 @@ export const techStack: TechStack[] = [
 
   // Tools & Platform
   { name: "Git", color: "#F05032", icon: "git" },
-  { name: "GitHub", color: "#181717", icon: "github" },
+  { name: "GitHub", color: "#000000", icon: "github" },
   { name: "Vercel", color: "#000000", icon: "vercel" },
   { name: "PayPal", color: "#00457C", icon: "paypal" },
   { name: "Inertia.js", color: "#9553E9", icon: "inertia" },
