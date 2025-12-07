@@ -83,7 +83,7 @@ export async function POST(request: NextRequest) {
     const emailSubject = subject(locale, name);
 
     const data = await resend.emails.send({
-      from: "Portfolio Contact <falihdzakwanz.vercel.app>",
+      from: "Portfolio Contact <onboarding@resend.dev>",
       to: process.env.CONTACT_EMAIL || "falihdzakwan028@gmail.com",
       subject: emailSubject,
       html: emailHtml,
