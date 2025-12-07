@@ -1,0 +1,82 @@
+{
+  "nav": {
+    "about": "About",
+    "projects": "Projects",
+    "skills": "Skills",
+    "contact": "Contact"
+  },
+  "hero": {
+    "greeting": "Hi, I'm",
+    "name": "Falih Dzakwan Zuhdi",
+    "title": "Fullstack Developer",
+    "bio": "Transforming ideas into digital reality. I craft web applications that are not only beautiful, but also powerful and efficient. Have a vision for your project? Let's bring it to life together.",
+    "viewProjects": "View Projects",
+    "downloadCV": "Download CV",
+    "contactMe": "Contact Me"
+  },
+  "about": {
+    "title": "About Me",
+    "name": "Falih Dzakwan Zuhdi",
+    "role": "Fullstack Developer",
+    "bio": "I'm a Fullstack Developer specializing in the Next.js ecosystem, seamlessly integrating modern frontend with robust backend solutions. I focus on building efficient, secure, and user-friendly web applications. Have an exciting project idea? Let's bring it to life together!",
+    "education": "Institut Teknologi Sumatera",
+    "major": "Informatics Engineering",
+    "downloadCV": "Download CV"
+  },
+  "projects": {
+    "title": "My Projects",
+    "featured": "Featured",
+    "viewLive": "View Live",
+    "viewCode": "View Code",
+    "allProjects": "All Projects"
+  },
+  "skills": {
+    "title": "Skills & Technologies",
+    "categories": {
+      "frontend": "Frontend",
+      "backend": "Backend",
+      "database": "Database",
+      "tools": "Tools & Platform"
+    }
+  },
+  "contact": {
+    "title": "Let's Connect",
+    "description": "Have an interesting project or want to collaborate? Feel free to reach out!",
+    "form": {
+      "name": "Name",
+      "namePlaceholder": "John Doe",
+      "email": "Email",
+      "emailPlaceholder": "johndoe@example.com",
+      "message": "Message",
+      "messagePlaceholder": "Tell me about your project or idea...",
+      "submit": "Send Message",
+      "sending": "Sending..."
+    },
+    "success": "Message sent successfully! I'll get back to you soon.",
+    "error": "An error occurred. Please try again.",
+    "rateLimit": "Too many requests. Please try again later."
+  },
+  "footer": {
+    "rights": "All Rights Reserved",
+    "madeWith": "Made with",
+    "by": "by"
+  },
+  "errors": {
+    "nameRequired": "Name is required",
+    "nameMin": "Name must be at least 2 characters",
+    "emailRequired": "Email is required",
+    "emailInvalid": "Invalid email format",
+    "messageRequired": "Message is required",
+    "messageMin": "Message must be at least 10 characters"
+  },
+  "notFound": {
+    "title": "Page Not Found",
+    "description": "Sorry, the page you are looking for does not exist.",
+    "backHome": "Back to Home"
+  },
+  "error": {
+    "title": "Something Went Wrong",
+    "description": "Sorry, an error occurred. Please try again.",
+    "retry": "Try Again"
+  }
+}

@@ -1,0 +1,82 @@
+{
+  "nav": {
+    "about": "Tentang",
+    "projects": "Proyek",
+    "skills": "Keahlian",
+    "contact": "Kontak"
+  },
+  "hero": {
+    "greeting": "Halo, saya",
+    "name": "Falih Dzakwan Zuhdi",
+    "title": "Fullstack Developer",
+    "bio": "Mengubah ide menjadi kenyataan digital. Saya menciptakan aplikasi web yang tidak hanya indah, tetapi juga powerful dan efisien. Punya visi untuk project Anda? Mari kita wujudkan bersama.",
+    "viewProjects": "Lihat Proyek",
+    "downloadCV": "Unduh CV",
+    "contactMe": "Hubungi Saya"
+  },
+  "about": {
+    "title": "Tentang Saya",
+    "name": "Falih Dzakwan Zuhdi",
+    "role": "Fullstack Developer",
+    "bio": "Saya adalah Fullstack Developer yang berspesialisasi dalam ekosistem Next.js, mengintegrasikan frontend modern dengan backend yang robust. Saya fokus merancang aplikasi web yang efisien, aman, dan user-friendly. Punya ide project menarik? Mari wujudkan bersama!",
+    "education": "Institut Teknologi Sumatera",
+    "major": "Teknik Informatika",
+    "downloadCV": "Unduh CV"
+  },
+  "projects": {
+    "title": "Proyek Saya",
+    "featured": "Unggulan",
+    "viewLive": "Lihat Demo",
+    "viewCode": "Lihat Kode",
+    "allProjects": "Semua Proyek"
+  },
+  "skills": {
+    "title": "Keahlian & Teknologi",
+    "categories": {
+      "frontend": "Frontend",
+      "backend": "Backend",
+      "database": "Database",
+      "tools": "Tools & Platform"
+    }
+  },
+  "contact": {
+    "title": "Mari Terhubung",
+    "description": "Punya proyek menarik atau ingin berkolaborasi? Jangan ragu untuk menghubungi saya!",
+    "form": {
+      "name": "Nama",
+      "namePlaceholder": "John Doe",
+      "email": "Email",
+      "emailPlaceholder": "johndoe@example.com",
+      "message": "Pesan",
+      "messagePlaceholder": "Ceritakan tentang proyek atau ide Anda...",
+      "submit": "Kirim Pesan",
+      "sending": "Mengirim..."
+    },
+    "success": "Pesan berhasil dikirim! Saya akan segera menghubungi Anda.",
+    "error": "Terjadi kesalahan. Silakan coba lagi.",
+    "rateLimit": "Terlalu banyak permintaan. Silakan coba lagi nanti."
+  },
+  "footer": {
+    "rights": "Hak Cipta Dilindungi",
+    "madeWith": "Dibuat dengan",
+    "by": "oleh"
+  },
+  "errors": {
+    "nameRequired": "Nama wajib diisi",
+    "nameMin": "Nama minimal 2 karakter",
+    "emailRequired": "Email wajib diisi",
+    "emailInvalid": "Format email tidak valid",
+    "messageRequired": "Pesan wajib diisi",
+    "messageMin": "Pesan minimal 10 karakter"
+  },
+  "notFound": {
+    "title": "Halaman Tidak Ditemukan",
+    "description": "Maaf, halaman yang Anda cari tidak ditemukan.",
+    "backHome": "Kembali ke Beranda"
+  },
+  "error": {
+    "title": "Terjadi Kesalahan",
+    "description": "Maaf, terjadi kesalahan. Silakan coba lagi.",
+    "retry": "Coba Lagi"
+  }
+}

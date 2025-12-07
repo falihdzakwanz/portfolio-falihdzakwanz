@@ -1,0 +1,106 @@
+"use client";
+
+import { useTranslations } from "next-intl";
+import { motion } from "framer-motion";
+import { techStack } from "@/data/tech-stack";
+import * as SimpleIcons from "simple-icons";
+
+const container = {
+  hidden: { opacity: 0 },
+  show: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.05,
+    },
+  },
+};
+
+const item = {
+  hidden: { opacity: 0, scale: 0.8 },
+  show: {
+    opacity: 1,
+    scale: 1,
+    transition: {
+      type: "spring" as const,
+      stiffness: 100,
+    },
+  },
+};
+
+export function Skills() {
+  const t = useTranslations("skills");
+
+  return (
+    <section id="skills" className="py-28 md:py-44 bg-muted/50">
+      <div className="container px-6 md:px-8">
+        <motion.div
+          initial="hidden"
+          whileInView="show"
+          viewport={{ once: true, amount: 0.2 }}
+          variants={container}
+        >
+          <motion.h2
+            variants={item}
+            className="text-3xl md:text-5xl font-bold text-center mb-12"
+          >
+            {t("title")}
+          </motion.h2>
+
+          {/* Tech Badges Grid */}
+          <div className="flex flex-wrap justify-center gap-4 max-w-5xl mx-auto">
+            {techStack.map((tech) => {
+              const iconSlug = `si${tech.icon
+                .charAt(0)
+                .toUpperCase()}${tech.icon.slice(1)}`;
+              const icon = (SimpleIcons as any)[iconSlug];
+
+              return (
+                <motion.div
+                  key={tech.name}
+                  variants={item}
+                  whileHover={{
+                    scale: 1.1,
+                    y: -5,
+                    transition: { type: "spring", stiffness: 400 },
+                  }}
+                  className="group relative"
+                >
+                  <div
+                    className="flex items-center gap-2 px-4 py-2 rounded-full border-2 shadow-lg hover:shadow-xl transition-all duration-300 cursor-default"
+                    style={{
+                      borderColor: tech.color,
+                      backgroundColor: "hsl(var(--background))",
+                    }}
+                  >
+                    {icon && (
+                      <svg
+                        role="img"
+                        viewBox="0 0 24 24"
+                        className="w-5 h-5 transition-transform group-hover:rotate-12"
+                        style={{ fill: tech.color }}
+                      >
+                        <path d={icon.path} />
+                      </svg>
+                    )}
+                    <span
+                      className="font-semibold text-sm whitespace-nowrap"
+                      style={{ color: tech.color }}
+                    >
+                      {tech.name}
+                    </span>
+                  </div>
+
+                  {/* Glow effect on hover */}
+                  <div
+                    className="absolute inset-0 rounded-full blur-xl opacity-0 group-hover:opacity-30 transition-opacity duration-300 -z-10"
+                    style={{ backgroundColor: tech.color }}
+                  />
+                </motion.div>
+              );
+            })}
+          </div>
+        </motion.div>
+      </div>
+    </section>
+  );
+}
