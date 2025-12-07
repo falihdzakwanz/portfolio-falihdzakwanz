@@ -85,9 +85,7 @@ export function Header() {
                 transition={{ type: "spring", stiffness: 400, damping: 10 }}
               >
                 <Icon className="h-4 w-4" />
-                {t(
-                  item.key as "about" | "projects" | "skills" | "contact"
-                )}
+                {t(item.key as "about" | "projects" | "skills" | "contact")}
               </motion.button>
             );
           })}
