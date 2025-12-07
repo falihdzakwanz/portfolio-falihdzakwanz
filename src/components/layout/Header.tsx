@@ -4,10 +4,25 @@ import { useState, useEffect } from "react";
 import { useTranslations, useLocale } from "next-intl";
 import { useRouter, usePathname } from "next/navigation";
 import { motion } from "framer-motion";
-import { Moon, Sun, Menu, Globe } from "lucide-react";
+import {
+  Moon,
+  Sun,
+  Menu,
+  Globe,
+  User,
+  FolderGit2,
+  Code2,
+  Mail,
+} from "lucide-react";
 import { useTheme } from "next-themes";
 import { Button } from "@/components/ui/button";
-import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
+import {
+  Sheet,
+  SheetContent,
+  SheetTrigger,
+  SheetTitle,
+} from "@/components/ui/sheet";
+import { VisuallyHidden } from "@radix-ui/react-visually-hidden";
 import Cookies from "js-cookie";
 
 export function Header() {
@@ -41,10 +56,10 @@ export function Header() {
   };
 
   const navItems = [
-    { key: "about", id: "about" },
-    { key: "projects", id: "projects" },
-    { key: "skills", id: "skills" },
-    { key: "contact", id: "contact" },
+    { key: "about", id: "about", icon: User },
+    { key: "projects", id: "projects", icon: FolderGit2 },
+    { key: "skills", id: "skills", icon: Code2 },
+    { key: "contact", id: "contact", icon: Mail },
   ];
 
   return (
@@ -59,17 +74,23 @@ export function Header() {
 
         {/* Desktop Navigation */}
         <nav className="hidden md:flex items-center gap-6">
-          {navItems.map((item) => (
-            <motion.button
-              key={item.key}
-              onClick={() => scrollToSection(item.id)}
-              className="text-sm font-medium hover:text-primary transition-colors cursor-pointer"
-              whileHover={{ scale: 1.1, y: -2 }}
-              transition={{ type: "spring", stiffness: 400, damping: 10 }}
-            >
-              {t(item.key as any)}
-            </motion.button>
-          ))}
+          {navItems.map((item) => {
+            const Icon = item.icon;
+            return (
+              <motion.button
+                key={item.key}
+                onClick={() => scrollToSection(item.id)}
+                className="flex items-center gap-2 text-sm font-medium hover:text-primary transition-colors cursor-pointer"
+                whileHover={{ scale: 1.1, y: -2 }}
+                transition={{ type: "spring", stiffness: 400, damping: 10 }}
+              >
+                <Icon className="h-4 w-4" />
+                {t(
+                  item.key as "about" | "projects" | "skills" | "contact"
+                )}
+              </motion.button>
+            );
+          })}
         </nav>
 
         {/* Actions */}
@@ -128,19 +149,32 @@ export function Header() {
                 <span className="sr-only">Open menu</span>
               </Button>
             </SheetTrigger>
-            <SheetContent side="right">
+            <SheetContent side="right" className="px-6">
+              <VisuallyHidden>
+                <SheetTitle>Navigation Menu</SheetTitle>
+              </VisuallyHidden>
               <nav className="flex flex-col gap-4 mt-8">
-                {navItems.map((item) => (
-                  <motion.button
-                    key={item.key}
-                    onClick={() => scrollToSection(item.id)}
-                    className="text-lg font-medium hover:text-primary transition-colors text-left"
-                    whileHover={{ x: 8, scale: 1.05 }}
-                    transition={{ type: "spring", stiffness: 400, damping: 10 }}
-                  >
-                    {t(item.key as "about" | "projects" | "skills" | "contact")}
-                  </motion.button>
-                ))}
+                {navItems.map((item) => {
+                  const Icon = item.icon;
+                  return (
+                    <motion.button
+                      key={item.key}
+                      onClick={() => scrollToSection(item.id)}
+                      className="flex items-center gap-3 text-lg font-medium hover:text-primary transition-colors text-left"
+                      whileHover={{ x: 8, scale: 1.05 }}
+                      transition={{
+                        type: "spring",
+                        stiffness: 400,
+                        damping: 10,
+                      }}
+                    >
+                      <Icon className="h-5 w-5" />
+                      {t(
+                        item.key as "about" | "projects" | "skills" | "contact"
+                      )}
+                    </motion.button>
+                  );
+                })}
               </nav>
             </SheetContent>
           </Sheet>
