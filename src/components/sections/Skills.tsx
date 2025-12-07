@@ -1,5 +1,6 @@
 "use client";
 
+import { useState, useEffect } from "react";
 import { useTranslations } from "next-intl";
 import { useTheme } from "next-themes";
 import { motion } from "framer-motion";
@@ -30,12 +31,23 @@ const item = {
 
 export function Skills() {
   const t = useTranslations("skills");
-  const { theme } = useTheme();
+  const { theme, resolvedTheme } = useTheme();
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    const timer = setTimeout(() => setMounted(true), 0);
+    return () => clearTimeout(timer);
+  }, []);
 
   // Function to get appropriate color based on theme
   const getColor = (originalColor: string) => {
+    // If not mounted yet, return original color to avoid hydration mismatch
+    if (!mounted) {
+      return originalColor;
+    }
+    const currentTheme = resolvedTheme || theme;
     // If dark mode and color is black, use white instead
-    if (theme === "dark" && originalColor === "#000000") {
+    if (currentTheme === "dark" && originalColor === "#000000") {
       return "#FFFFFF";
     }
     return originalColor;
@@ -63,7 +75,7 @@ export function Skills() {
               const iconSlug = `si${tech.icon
                 .charAt(0)
                 .toUpperCase()}${tech.icon.slice(1)}`;
-              const icon = (SimpleIcons as any)[iconSlug];
+              const icon = (SimpleIcons as Record<string, { path: string }>)[iconSlug];
               const displayColor = getColor(tech.color);
 
               return (
