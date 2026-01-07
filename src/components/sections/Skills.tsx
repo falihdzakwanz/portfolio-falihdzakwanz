@@ -54,7 +54,7 @@ export function Skills() {
   };
 
   return (
-    <section id="skills" className="py-28 md:py-44 bg-muted/50">
+    <section id="skills" className="py-28 md:py-44">
       <div className="container px-6 md:px-8">
         <motion.div
           initial="hidden"

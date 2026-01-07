@@ -224,7 +224,7 @@ export function Projects() {
   };
 
   return (
-    <section id="projects" className="py-28 md:py-44">
+    <section id="projects" className="py-28 md:py-44 bg-muted/50">
       <div className="container px-6 md:px-8">
         <motion.div
           initial="hidden"

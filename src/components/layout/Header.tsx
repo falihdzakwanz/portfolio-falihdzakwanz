@@ -13,6 +13,7 @@ import {
   FolderGit2,
   Code2,
   Mail,
+  Briefcase,
 } from "lucide-react";
 import { useTheme } from "next-themes";
 import { Button } from "@/components/ui/button";
@@ -57,6 +58,7 @@ export function Header() {
 
   const navItems = [
     { key: "about", id: "about", icon: User },
+    { key: "experience", id: "experience", icon: Briefcase },
     { key: "projects", id: "projects", icon: FolderGit2 },
     { key: "skills", id: "skills", icon: Code2 },
     { key: "contact", id: "contact", icon: Mail },
@@ -85,7 +87,14 @@ export function Header() {
                 transition={{ type: "spring", stiffness: 400, damping: 10 }}
               >
                 <Icon className="h-4 w-4" />
-                {t(item.key as "about" | "projects" | "skills" | "contact")}
+                {t(
+                  item.key as
+                    | "about"
+                    | "experience"
+                    | "projects"
+                    | "skills"
+                    | "contact"
+                )}
               </motion.button>
             );
           })}
@@ -168,7 +177,12 @@ export function Header() {
                     >
                       <Icon className="h-5 w-5" />
                       {t(
-                        item.key as "about" | "projects" | "skills" | "contact"
+                        item.key as
+                          | "about"
+                          | "experience"
+                          | "projects"
+                          | "skills"
+                          | "contact"
                       )}
                     </motion.button>
                   );

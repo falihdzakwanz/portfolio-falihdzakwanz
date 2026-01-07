@@ -3,6 +3,7 @@
     "about": "About",
     "projects": "Projects",
     "skills": "Skills",
+    "experience": "Experience",
     "contact": "Contact"
   },
   "hero": {
@@ -38,6 +39,16 @@
       "database": "Database",
       "tools": "Tools & Platform"
     }
+  },
+  "experience": {
+    "title": "Work Experience",
+    "current": "Current",
+    "present": "Present",
+    "month": "month",
+    "months": "months",
+    "year": "year",
+    "years": "years",
+    "and": "and"
   },
   "contact": {
     "title": "Let's Connect",
