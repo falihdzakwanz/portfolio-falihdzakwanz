@@ -3,6 +3,7 @@
     "about": "Tentang",
     "projects": "Proyek",
     "skills": "Keahlian",
+    "experience": "Pengalaman",
     "contact": "Kontak"
   },
   "hero": {
@@ -38,6 +39,16 @@
       "database": "Database",
       "tools": "Tools & Platform"
     }
+  },
+  "experience": {
+    "title": "Pengalaman Kerja",
+    "current": "Saat Ini",
+    "present": "Sekarang",
+    "month": "bulan",
+    "months": "bulan",
+    "year": "tahun",
+    "years": "tahun",
+    "and": "dan"
   },
   "contact": {
     "title": "Mari Terhubung",

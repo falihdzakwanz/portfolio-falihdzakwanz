@@ -95,7 +95,7 @@ export function Contact() {
   }
 
   return (
-    <section id="contact" className="py-28 md:py-44">
+    <section id="contact" className="py-28 md:py-44 bg-muted/50">
       <div className="container px-6 md:px-8">
         <motion.div
           initial="hidden"

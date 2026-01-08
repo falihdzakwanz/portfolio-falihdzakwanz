@@ -2,6 +2,34 @@ import { Project } from "@/types";
 
 export const projects: Project[] = [
   {
+    id: "visicode",
+    title: {
+      id: "VisiCode",
+      en: "VisiCode",
+    },
+    description: {
+      id: "Platform layanan web development yang menawarkan paket pembuatan website mulai dari landing page sederhana hingga aplikasi web lengkap dengan CMS untuk bisnis dan startup.",
+      en: "Web development service platform offering website creation packages from simple landing pages to complete web applications with CMS for businesses and startups.",
+    },
+    longDescription: {
+      id: "VisiCode adalah platform layanan web development yang saya bangun untuk membantu bisnis dan startup mewujudkan visi digital mereka. Platform ini menawarkan tiga paket utama: Vision Start (landing page, 3-5 hari), Vision Spark (MVP testing, 1-2 minggu), dan Vision Launch (full website dengan CMS, 4-6 minggu). Website dilengkapi dengan sistem Vision Assessment untuk mengkualifikasi klien, showcase packages, blog, FAQ, dan contact form yang terintegrasi dengan email notification. Saya membangun VisiCode dengan Next.js untuk performa optimal, menggunakan Tailwind CSS untuk desain yang clean dan responsive, serta Resend API untuk mengelola komunikasi email otomatis dengan klien. Fokus utama adalah memberikan solusi yang cepat, profesional, dan scalable untuk berbagai kebutuhan bisnis.",
+      en: "VisiCode is a web development service platform I built to help businesses and startups realize their digital vision. The platform offers three main packages: Vision Start (landing page, 3-5 days), Vision Spark (MVP testing, 1-2 weeks), and Vision Launch (full website with CMS, 4-6 weeks). The website is equipped with a Vision Assessment system to qualify clients, package showcase, blog, FAQ, and contact form integrated with email notifications. I built VisiCode with Next.js for optimal performance, using Tailwind CSS for clean and responsive design, and Resend API to manage automated email communication with clients. The main focus is delivering fast, professional, and scalable solutions for various business needs.",
+    },
+    image: "/projects/visicode.webp",
+    technologies: [
+      "Next.js",
+      "React",
+      "TypeScript",
+      "Tailwind CSS",
+      "Framer Motion",
+      "Resend",
+    ],
+    liveUrl: "https://visicode.vercel.app",
+    featured: true,
+    category: "fullstack",
+    date: "2025-12-11",
+  },
+  {
     id: "bap-photography",
     title: {
       id: "BAP Photography",
