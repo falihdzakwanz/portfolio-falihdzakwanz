@@ -15,7 +15,7 @@ export const experiences: Experience[] = [
       id: "Mengajar dan mendampingi mahasiswa dalam memahami konsep fundamental struktur data seperti Linked List, Stack, Queue, Graph, Tree, Heap, dan Hashing. Merancang studi kasus dan latihan pemrograman untuk memperkuat pemahaman teoritis menjadi solusi kode yang aplikatif.",
       en: "Taught and mentored students in understanding fundamental data structure concepts such as Linked List, Stack, Queue, Graph, Tree, Heap, and Hashing. Designed case studies and programming exercises to strengthen theoretical understanding into applicable code solutions.",
     },
-    technologies: ["Data Structures", "Algorithms", "C++", "Python"],
+    technologies: ["Data Structures", "Algorithms", "C++"],
     logo: "/companies/itera.png",
     startDate: "2025-09",
     endDate: "2025-12",
