@@ -29,7 +29,15 @@
     "featured": "Featured",
     "viewLive": "View Live",
     "viewCode": "View Code",
-    "allProjects": "All Projects"
+    "allProjects": "All Projects",
+    "role": "Role",
+    "impact": "Impact",
+    "challenge": "Technical Challenge",
+    "solution": "Solution",
+    "techRationale": "Technical Rationale",
+    "features": "Key Features",
+    "viewDetails": "View Details",
+    "screenshots": "Project Gallery"
   },
   "skills": {
     "title": "Skills & Technologies",

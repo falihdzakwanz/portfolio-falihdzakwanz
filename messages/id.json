@@ -27,9 +27,17 @@
   "projects": {
     "title": "Proyek Saya",
     "featured": "Unggulan",
-    "viewLive": "Lihat Demo",
-    "viewCode": "Lihat Kode",
-    "allProjects": "Semua Proyek"
+    "viewLive": "Lihat Live",
+    "viewCode": "Lihat Code",
+    "allProjects": "Semua Proyek",
+    "role": "Peran",
+    "impact": "Dampak",
+    "challenge": "Tantangan Teknis",
+    "solution": "Solusi",
+    "techRationale": "Rasional Teknis",
+    "features": "Fitur Utama",
+    "viewDetails": "Lihat Detail",
+    "screenshots": "Galeri Proyek"
   },
   "skills": {
     "title": "Keahlian & Teknologi",
