@@ -12,13 +12,38 @@ export interface Project {
     id: string;
     en: string;
   };
-  image: string;
+  image: string; // Featured image
+  screenshots: string[]; // Additional gallery images
   technologies: string[];
   liveUrl?: string;
   githubUrl?: string;
   featured: boolean;
   category: "web" | "mobile" | "fullstack" | "game" | "other";
   date: string;
+  role: {
+    id: string;
+    en: string;
+  };
+  impact: {
+    id: string;
+    en: string;
+  };
+  features: {
+    id: string;
+    en: string;
+  }[];
+  challenge: {
+    id: string;
+    en: string;
+  };
+  solution: {
+    id: string;
+    en: string;
+  };
+  techRationale: {
+    id: string;
+    en: string;
+  };
 }
 
 export interface SkillCategory {
