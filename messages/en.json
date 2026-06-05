@@ -22,7 +22,20 @@
     "bio": "I'm a Fullstack Developer specializing in the Next.js ecosystem, seamlessly integrating modern frontend with robust backend solutions. I focus on building efficient, secure, and user-friendly web applications. Have an exciting project idea? Let's bring it to life together!",
     "education": "Institut Teknologi Sumatera",
     "major": "Informatics Engineering",
-    "downloadCV": "Download CV"
+    "downloadCV": "Download CV",
+    "stats": {
+      "projects": "Projects Built",
+      "experience": "Years Experience",
+      "technologies": "Technologies",
+      "certifications": "Certifications"
+    },
+    "whatIDo": "What I Do",
+    "whatIDoDesc1": "I build full-stack web applications using modern frameworks like Next.js and Laravel, ensuring responsive, performant, and accessible user experiences.",
+    "whatIDoDesc2": "I design and implement RESTful APIs, database architectures, and server-side logic that scale efficiently with your business needs.",
+    "whatIDoDesc3": "I transform designs into pixel-perfect interfaces with smooth animations and thoughtful micro-interactions that delight users.",
+    "frontendDev": "Frontend Development",
+    "backendDev": "Backend Development",
+    "uiDesign": "UI/UX Design"
   },
   "projects": {
     "title": "My Projects",
@@ -32,15 +45,22 @@
     "allProjects": "All Projects",
     "role": "Role",
     "impact": "Impact",
-    "challenge": "Technical Challenge",
+    "challenge": "Challenge",
     "solution": "Solution",
     "techRationale": "Technical Rationale",
     "features": "Key Features",
     "viewDetails": "View Details",
-    "screenshots": "Project Gallery"
+    "screenshots": "Project Gallery",
+    "filterAll": "All",
+    "filterWeb": "Web",
+    "filterFullstack": "Fullstack",
+    "filterMobile": "Mobile",
+    "filterGame": "Game",
+    "filterOther": "Other"
   },
   "skills": {
     "title": "Skills & Technologies",
+    "proficiency": "Proficiency",
     "categories": {
       "frontend": "Frontend",
       "backend": "Backend",
@@ -56,16 +76,24 @@
     "months": "months",
     "year": "year",
     "years": "years",
-    "and": "and"
+    "and": "and",
+    "achievements": "Highlights"
   },
   "contact": {
     "title": "Let's Connect",
     "description": "Have an interesting project or want to collaborate? Feel free to reach out!",
+    "infoTitle": "Contact Information",
+    "infoDesc": "I'm always open to discussing new projects, creative ideas, or opportunities to be part of your vision.",
+    "email": "Email",
+    "location": "Lampung, Indonesia",
+    "social": "Social",
+    "available": "Available for opportunities",
+    "responseTime": "Usually responds within 24 hours",
     "form": {
       "name": "Name",
-      "namePlaceholder": "John Doe",
+      "namePlaceholder": "Your name",
       "email": "Email",
-      "emailPlaceholder": "johndoe@example.com",
+      "emailPlaceholder": "your@email.com",
       "message": "Message",
       "messagePlaceholder": "Tell me about your project or idea...",
       "submit": "Send Message",
@@ -78,7 +106,10 @@
   "footer": {
     "rights": "All Rights Reserved",
     "madeWith": "Made with",
-    "by": "by"
+    "by": "by",
+    "backToTop": "Back to Top",
+    "quickLinks": "Quick Links",
+    "connect": "Connect"
   },
   "errors": {
     "nameRequired": "Name is required",
