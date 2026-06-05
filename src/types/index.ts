@@ -47,7 +47,6 @@ export interface Project {
 }
 
 export interface Experience {
-  id: string;
   company: {
     id: string;
     en: string;
@@ -90,8 +89,7 @@ export interface TechStack {
 export interface SocialLink {
   name: string;
   url: string;
-  color?: string;
-  icon?: string;
+  color: string;
 }
 
 export interface NavItem {
