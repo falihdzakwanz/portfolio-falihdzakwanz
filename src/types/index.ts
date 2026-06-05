@@ -12,26 +12,10 @@ export interface Project {
     id: string;
     en: string;
   };
-  image: string; // Featured image
-  screenshots: string[]; // Additional gallery images
-  technologies: string[];
-  liveUrl?: string;
-  githubUrl?: string;
-  featured: boolean;
-  category: "web" | "mobile" | "fullstack" | "game" | "other";
-  date: string;
   role: {
     id: string;
     en: string;
   };
-  impact: {
-    id: string;
-    en: string;
-  };
-  features: {
-    id: string;
-    en: string;
-  }[];
   challenge: {
     id: string;
     en: string;
@@ -40,33 +24,34 @@ export interface Project {
     id: string;
     en: string;
   };
+  impact: {
+    id: string;
+    en: string;
+  };
   techRationale: {
     id: string;
     en: string;
   };
-}
-
-export interface SkillCategory {
-  name: {
+  features: {
     id: string;
     en: string;
-  };
-  skills: string[];
-}
-
-export interface SocialLink {
-  name: string;
-  url: string;
-  icon: string;
+  }[];
+  technologies: string[];
+  category: "web" | "fullstack" | "mobile" | "game" | "other";
+  image: string;
+  screenshots: string[];
+  liveUrl?: string;
+  githubUrl?: string;
+  featured?: boolean;
+  date: string;
 }
 
 export interface Experience {
-  id: string;
   company: {
     id: string;
     en: string;
   };
-  role: {
+  position: {
     id: string;
     en: string;
   };
@@ -74,14 +59,46 @@ export interface Experience {
     id: string;
     en: string;
   };
-  technologies: string[];
-  logo?: string;
-  startDate: string; // Format: "YYYY-MM"
-  endDate?: string; // undefined = current position
   location: {
     id: string;
     en: string;
   };
-  type: "fulltime" | "parttime" | "contract" | "freelance" | "internship";
-  locationType: "onsite" | "remote" | "hybrid";
+  type: {
+    id: string;
+    en: string;
+  };
+  startDate: string;
+  endDate: string | null;
+  isCurrent: boolean;
+  logo?: string;
+  link?: string;
+  achievements?: {
+    id: string[];
+    en: string[];
+  };
+  technologies?: string[];
 }
+
+export interface TechStack {
+  name: string;
+  color: string;
+  icon: string;
+  category: "frontend" | "backend" | "database" | "tools";
+}
+
+export interface SocialLink {
+  name: string;
+  url: string;
+  color: string;
+}
+
+export interface NavItem {
+  name: string;
+  href: string;
+  label: {
+    id: string;
+    en: string;
+  };
+}
+
+export type Locale = "id" | "en";

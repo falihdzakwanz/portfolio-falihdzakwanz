@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef, useState } from "react";
+import { useRef, useState, useMemo } from "react";
 import { useTranslations, useLocale } from "next-intl";
 import {
   motion,
@@ -36,6 +36,7 @@ import {
   Target,
   Wrench,
   Lightbulb,
+  Layers,
 } from "lucide-react";
 import { projects } from "@/data/projects";
 import { analytics } from "@/lib/analytics";
@@ -54,6 +55,15 @@ const container = {
 const item = {
   hidden: { opacity: 0, y: 20 },
   show: { opacity: 1, y: 0 },
+};
+
+const categoryIcons: Record<string, string> = {
+  all: "Layers",
+  web: "Layout",
+  mobile: "Smartphone",
+  fullstack: "Server",
+  game: "Gamepad2",
+  other: "MoreHorizontal",
 };
 
 function ProjectDetail({ project }: { project: (typeof projects)[0] }) {
@@ -155,7 +165,7 @@ function ProjectDetail({ project }: { project: (typeof projects)[0] }) {
               {t("impact")}
             </h3>
             <p className="text-muted-foreground leading-relaxed italic border-l-2 border-primary/20 pl-4 py-1 font-serif">
-              "{project.impact[locale as "id" | "en"]}"
+              &ldquo;{project.impact[locale as "id" | "en"]}&rdquo;
             </p>
           </section>
 
@@ -176,7 +186,7 @@ function ProjectDetail({ project }: { project: (typeof projects)[0] }) {
               <div>
                 <p className="text-xs font-bold text-foreground/40 mb-1 tracking-tighter uppercase">{t("challenge")}</p>
                 <p className="text-sm italic opacity-80 leading-snug">
-                  "{project.challenge[locale as "id" | "en"]}"
+                  &ldquo;{project.challenge[locale as "id" | "en"]}&rdquo;
                 </p>
               </div>
               <div>
@@ -328,7 +338,7 @@ function ProjectCard({ project }: { project: (typeof projects)[0] }) {
                           {t("impact")}
                         </p>
                         <p className="line-clamp-3 text-sm italic font-serif leading-relaxed">
-                          "{project.impact[locale as "id" | "en"]}"
+                          &ldquo;{project.impact[locale as "id" | "en"]}&rdquo;
                         </p>
                       </motion.div>
 
@@ -409,15 +419,32 @@ function ProjectCard({ project }: { project: (typeof projects)[0] }) {
   );
 }
 
+const categories = ["all", "web", "fullstack", "mobile", "game", "other"] as const;
+type Category = (typeof categories)[number];
+
 export function Projects() {
   const t = useTranslations("projects");
+  const [activeCategory, setActiveCategory] = useState<Category>("all");
 
   // Sort projects: featured first, then by date
-  const sortedProjects = [...projects].sort((a, b) => {
-    if (a.featured && !b.featured) return -1;
-    if (!a.featured && b.featured) return 1;
-    return new Date(b.date).getTime() - new Date(a.date).getTime();
-  });
+  const filteredProjects = useMemo(() => {
+    const sorted = [...projects].sort((a, b) => {
+      if (a.featured && !b.featured) return -1;
+      if (!a.featured && b.featured) return 1;
+      return new Date(b.date).getTime() - new Date(a.date).getTime();
+    });
+    if (activeCategory === "all") return sorted;
+    return sorted.filter((p) => p.category === activeCategory);
+  }, [activeCategory]);
+
+  const categoryCounts = useMemo(() => {
+    const counts: Record<string, number> = { all: projects.length };
+    for (const cat of categories) {
+      if (cat === "all") continue;
+      counts[cat] = projects.filter((p) => p.category === cat).length;
+    }
+    return counts;
+  }, []);
 
   return (
     <section id="projects" className="py-28 md:py-44 bg-muted/50">
@@ -430,16 +457,60 @@ export function Projects() {
         >
           <motion.h2
             variants={item}
-            className="text-3xl md:text-5xl font-bold text-center mb-12"
+            className="text-3xl md:text-5xl font-bold text-center mb-4"
           >
             {t("title")}
           </motion.h2>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {sortedProjects.map((project) => (
-              <ProjectCard key={project.id} project={project} />
-            ))}
-          </div>
+          {/* Filter tabs */}
+          <motion.div variants={item} className="flex flex-wrap justify-center gap-2 mb-12">
+            {categories.map((cat) => {
+              const isActive = activeCategory === cat;
+              return (
+                <button
+                  key={cat}
+                  onClick={() => setActiveCategory(cat)}
+                  className={`relative px-4 py-2 rounded-full text-sm font-medium transition-all duration-300 ${
+                    isActive
+                      ? "bg-primary text-primary-foreground shadow-lg shadow-primary/25"
+                      : "bg-card border hover:border-primary/50 text-muted-foreground hover:text-foreground"
+                  }`}
+                >
+                  {t(`filter${cat.charAt(0).toUpperCase()}${cat.slice(1)}`)}
+                  <span className="ml-1.5 text-xs opacity-70">
+                    ({categoryCounts[cat]})
+                  </span>
+                </button>
+              );
+            })}
+          </motion.div>
+
+          {/* Grid */}
+          <AnimatePresence mode="wait">
+            <motion.div
+              key={activeCategory}
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -10 }}
+              transition={{ duration: 0.3 }}
+              className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
+            >
+              {filteredProjects.map((project) => (
+                <ProjectCard key={project.id} project={project} />
+              ))}
+            </motion.div>
+          </AnimatePresence>
+
+          {/* Empty state */}
+          {filteredProjects.length === 0 && (
+            <motion.p
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              className="text-center text-muted-foreground py-12"
+            >
+              No projects found in this category.
+            </motion.p>
+          )}
         </motion.div>
       </div>
     </section>
