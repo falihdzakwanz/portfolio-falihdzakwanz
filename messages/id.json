@@ -9,8 +9,8 @@
   "hero": {
     "greeting": "Halo, saya",
     "name": "Falih Dzakwan Zuhdi",
-    "title": "Fullstack Developer",
-    "bio": "Mengubah ide menjadi kenyataan digital. Saya menciptakan aplikasi web yang tidak hanya indah, tetapi juga powerful dan efisien. Punya visi untuk project Anda? Mari kita wujudkan bersama.",
+    "title": "Fullstack + AI Developer",
+    "bio": "Saya membangun aplikasi web fullstack dan sistem berbasis AI. Dari face recognition absensi real-time hingga LMS berbasis AI — saya mengubah ide kompleks menjadi software siap produksi.",
     "viewProjects": "Lihat Proyek",
     "downloadCV": "Unduh CV",
     "contactMe": "Hubungi Saya"
@@ -45,6 +45,7 @@
       "frontend": "Frontend",
       "backend": "Backend",
       "database": "Database",
+      "ai_ml": "AI / ML",
       "tools": "Tools & Platform"
     }
   },
@@ -58,9 +59,14 @@
     "years": "tahun",
     "and": "dan"
   },
+  "stats": {
+    "projectsBuilt": "Proyek",
+    "expertise": "Keahlian",
+    "yearsExp": "Tahun Pengalaman"
+  },
   "contact": {
-    "title": "Mari Terhubung",
-    "description": "Punya proyek menarik atau ingin berkolaborasi? Jangan ragu untuk menghubungi saya!",
+    "title": "Mari Bekerja Sama",
+    "description": "Tertarik bekerja sama atau punya project? Hubungi saya dan mari kita bangun sesuatu yang hebat.",
     "form": {
       "name": "Nama",
       "namePlaceholder": "John Doe",
@@ -68,7 +74,7 @@
       "emailPlaceholder": "johndoe@example.com",
       "message": "Pesan",
       "messagePlaceholder": "Ceritakan tentang proyek atau ide Anda...",
-      "submit": "Kirim Pesan",
+      "submit": "Hubungi Saya",
       "sending": "Mengirim..."
     },
     "success": "Pesan berhasil dikirim! Saya akan segera menghubungi Anda.",

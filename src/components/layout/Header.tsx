@@ -3,18 +3,7 @@
 import { useState, useEffect } from "react";
 import { useTranslations, useLocale } from "next-intl";
 import { useRouter, usePathname } from "next/navigation";
-import { motion } from "framer-motion";
-import {
-  Moon,
-  Sun,
-  Menu,
-  Globe,
-  User,
-  FolderGit2,
-  Code2,
-  Mail,
-  Briefcase,
-} from "lucide-react";
+import { Moon, Sun, Menu, Globe } from "lucide-react";
 import { useTheme } from "next-themes";
 import { Button } from "@/components/ui/button";
 import {
@@ -26,6 +15,12 @@ import {
 import { VisuallyHidden } from "@radix-ui/react-visually-hidden";
 import Cookies from "js-cookie";
 
+const NAV_ITEMS = [
+  { key: "projects", id: "projects" },
+  { key: "experience", id: "experience" },
+  { key: "contact", id: "contact" },
+] as const;
+
 export function Header() {
   const t = useTranslations("nav");
   const locale = useLocale();
@@ -34,11 +29,16 @@ export function Header() {
   const { theme, setTheme } = useTheme();
   const [mounted, setMounted] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
 
   useEffect(() => {
-    // Set mounted to true after initial render
-    const timer = setTimeout(() => setMounted(true), 0);
-    return () => clearTimeout(timer);
+    setMounted(true);
+
+    const handleScroll = () => {
+      setScrolled(window.scrollY > 20);
+    };
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
   const scrollToSection = (sectionId: string) => {
@@ -51,94 +51,67 @@ export function Header() {
 
   const switchLocale = (newLocale: string) => {
     Cookies.set("NEXT_LOCALE", newLocale, { expires: 365 });
-    const newPathname = pathname.replace(`/${locale}`, `/${newLocale}`);
-    router.push(newPathname);
+    router.push(pathname.replace(`/${locale}`, `/${newLocale}`));
     router.refresh();
   };
 
-  const navItems = [
-    { key: "about", id: "about", icon: User },
-    { key: "experience", id: "experience", icon: Briefcase },
-    { key: "projects", id: "projects", icon: FolderGit2 },
-    { key: "skills", id: "skills", icon: Code2 },
-    { key: "contact", id: "contact", icon: Mail },
-  ];
-
   return (
-    <header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-backdrop-filter:bg-background/60">
-      <div className="container flex h-16 items-center justify-between px-6 md:px-8">
+    <header
+      className={`fixed top-0 inset-x-0 z-50 transition-all duration-300 ${
+        scrolled
+          ? "bg-background/80 backdrop-blur-xl border-b border-border/30"
+          : "bg-transparent"
+      }`}
+    >
+      <div className="container mx-auto flex h-16 items-center justify-between px-6">
+        {/* Logo / Wordmark */}
         <button
           onClick={() => scrollToSection("hero")}
-          className="text-2xl font-bold hover:opacity-80 transition-opacity cursor-pointer"
+          className="text-lg font-semibold tracking-tight hover:opacity-70 transition-opacity"
         >
           FDZ
         </button>
 
-        {/* Desktop Navigation */}
-        <nav className="hidden md:flex items-center gap-6">
-          {navItems.map((item) => {
-            const Icon = item.icon;
-            return (
-              <motion.button
-                key={item.key}
-                onClick={() => scrollToSection(item.id)}
-                className="flex items-center gap-2 text-sm font-medium hover:text-primary transition-colors cursor-pointer"
-                whileHover={{ scale: 1.1, y: -2 }}
-                transition={{ type: "spring", stiffness: 400, damping: 10 }}
-              >
-                <Icon className="h-4 w-4" />
-                {t(
-                  item.key as
-                    | "about"
-                    | "experience"
-                    | "projects"
-                    | "skills"
-                    | "contact"
-                )}
-              </motion.button>
-            );
-          })}
+        {/* Desktop Nav — minimal 3 items */}
+        <nav className="hidden md:flex items-center gap-8">
+          {NAV_ITEMS.map((item) => (
+            <button
+              key={item.key}
+              onClick={() => scrollToSection(item.id)}
+              className="text-sm text-muted-foreground hover:text-foreground transition-colors"
+            >
+              {t(item.key)}
+            </button>
+          ))}
         </nav>
 
         {/* Actions */}
-        <div className="flex items-center gap-2">
-          {/* Language Switcher */}
+        <div className="flex items-center gap-1">
+          {/* Language */}
           <Button
             variant="ghost"
             size="icon"
+            className="size-9 text-muted-foreground hover:text-foreground"
             onClick={() => switchLocale(locale === "id" ? "en" : "id")}
-            title={
-              locale === "id"
-                ? "Switch to English"
-                : "Ganti ke Bahasa Indonesia"
-            }
+            title={locale === "id" ? "Switch to English" : "Ganti ke Bahasa Indonesia"}
           >
-            <motion.div
-              whileHover={{ scale: 1.2, rotate: 180 }}
-              transition={{ type: "spring", stiffness: 400, damping: 10 }}
-            >
-              <Globe className="h-5 w-5" />
-            </motion.div>
+            <Globe className="size-4" />
             <span className="sr-only">Change language</span>
           </Button>
 
-          {/* Theme Toggle */}
+          {/* Theme */}
           {mounted && (
             <Button
               variant="ghost"
               size="icon"
+              className="size-9 text-muted-foreground hover:text-foreground"
               onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
             >
-              <motion.div
-                whileHover={{ scale: 1.2, rotate: 20 }}
-                transition={{ type: "spring", stiffness: 400, damping: 10 }}
-              >
-                {theme === "dark" ? (
-                  <Sun className="h-5 w-5" />
-                ) : (
-                  <Moon className="h-5 w-5" />
-                )}
-              </motion.div>
+              {theme === "dark" ? (
+                <Sun className="size-4" />
+              ) : (
+                <Moon className="size-4" />
+              )}
               <span className="sr-only">Toggle theme</span>
             </Button>
           )}
@@ -146,47 +119,25 @@ export function Header() {
           {/* Mobile Menu */}
           <Sheet open={isOpen} onOpenChange={setIsOpen}>
             <SheetTrigger asChild className="md:hidden">
-              <Button variant="ghost" size="icon">
-                <motion.div
-                  whileHover={{ scale: 1.2 }}
-                  transition={{ type: "spring", stiffness: 400, damping: 10 }}
-                >
-                  <Menu className="h-5 w-5" />
-                </motion.div>
+              <Button variant="ghost" size="icon" className="size-9">
+                <Menu className="size-4" />
                 <span className="sr-only">Open menu</span>
               </Button>
             </SheetTrigger>
             <SheetContent side="right" className="px-6">
               <VisuallyHidden>
-                <SheetTitle>Navigation Menu</SheetTitle>
+                <SheetTitle>Navigation</SheetTitle>
               </VisuallyHidden>
-              <nav className="flex flex-col gap-4 mt-8">
-                {navItems.map((item) => {
-                  const Icon = item.icon;
-                  return (
-                    <motion.button
-                      key={item.key}
-                      onClick={() => scrollToSection(item.id)}
-                      className="flex items-center gap-3 text-lg font-medium hover:text-primary transition-colors text-left"
-                      whileHover={{ x: 8, scale: 1.05 }}
-                      transition={{
-                        type: "spring",
-                        stiffness: 400,
-                        damping: 10,
-                      }}
-                    >
-                      <Icon className="h-5 w-5" />
-                      {t(
-                        item.key as
-                          | "about"
-                          | "experience"
-                          | "projects"
-                          | "skills"
-                          | "contact"
-                      )}
-                    </motion.button>
-                  );
-                })}
+              <nav className="flex flex-col gap-5 mt-12">
+                {NAV_ITEMS.map((item) => (
+                  <button
+                    key={item.key}
+                    onClick={() => scrollToSection(item.id)}
+                    className="text-lg text-left text-muted-foreground hover:text-foreground transition-colors"
+                  >
+                    {t(item.key)}
+                  </button>
+                ))}
               </nav>
             </SheetContent>
           </Sheet>

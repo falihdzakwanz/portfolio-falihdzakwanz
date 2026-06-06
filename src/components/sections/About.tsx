@@ -3,7 +3,7 @@
 import { useTranslations } from "next-intl";
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
-import { Download } from "lucide-react";
+import { Download, MapPin, GraduationCap, Award } from "lucide-react";
 import { analytics } from "@/lib/analytics";
 import { useLocale } from "next-intl";
 import Image from "next/image";
@@ -12,14 +12,12 @@ const container = {
   hidden: { opacity: 0 },
   show: {
     opacity: 1,
-    transition: {
-      staggerChildren: 0.1,
-    },
+    transition: { staggerChildren: 0.1 },
   },
 };
 
 const item = {
-  hidden: { opacity: 0, y: 20 },
+  hidden: { opacity: 0, y: 16 },
   show: { opacity: 1, y: 0 },
 };
 
@@ -33,8 +31,8 @@ export function About() {
   };
 
   return (
-    <section id="about" className="py-28 md:py-44 bg-muted/50">
-      <div className="container px-6 md:px-8">
+    <section id="about" className="py-20 md:py-28 bg-muted/30">
+      <div className="container mx-auto px-6">
         <motion.div
           initial="hidden"
           whileInView="show"
@@ -42,18 +40,19 @@ export function About() {
           variants={container}
           className="max-w-4xl mx-auto"
         >
-          <motion.h2
-            variants={item}
-            className="text-3xl md:text-5xl font-bold text-center mb-4"
-          >
-            {t("title")}
-          </motion.h2>
+          {/* Header */}
+          <motion.div variants={item} className="mb-10">
+            <h2 className="text-3xl md:text-4xl font-bold tracking-tight">
+              {t("title")}
+            </h2>
+            <div className="mt-3 w-12 h-0.5 bg-primary/40" />
+          </motion.div>
 
-          <motion.div variants={item} className="mt-12 space-y-6">
+          <motion.div variants={item}>
             <div className="flex flex-col md:flex-row gap-8 items-start">
               {/* Profile Photo */}
-              <motion.div variants={item} className="shrink-0 mx-auto md:mx-0">
-                <div className="relative w-48 h-48 md:w-64 md:h-64 rounded-2xl overflow-hidden ring-4 ring-primary/10 shadow-2xl">
+              <div className="shrink-0 mx-auto md:mx-0">
+                <div className="relative w-44 h-44 md:w-52 md:h-52 rounded-xl overflow-hidden border border-border">
                   <Image
                     src="/profile.jpg"
                     alt={t("name")}
@@ -61,29 +60,43 @@ export function About() {
                     className="object-cover"
                     priority
                   />
-                  <div className="absolute inset-0 bg-linear-to-t from-background/80 via-transparent to-transparent" />
                 </div>
-              </motion.div>
+              </div>
 
               {/* Content */}
               <div className="flex-1 space-y-4">
-                <h3 className="text-2xl font-semibold">{t("name")}</h3>
-                <p className="text-lg text-primary font-medium">{t("role")}</p>
-                <p className="text-muted-foreground leading-relaxed text-justify md:text-left">
+                <div>
+                  <h3 className="text-xl font-semibold">{t("name")}</h3>
+                  <p className="text-sm text-primary font-medium mt-0.5">{t("role")}</p>
+                </div>
+
+                <p className="text-sm text-muted-foreground leading-relaxed">
                   {t("bio")}
                 </p>
 
-                <div className="pt-4 space-y-2">
-                  <p className="text-sm font-medium">🎓 {t("education")}</p>
-                  <p className="text-sm text-muted-foreground">{t("major")}</p>
+                {/* Details */}
+                <div className="flex flex-wrap gap-x-6 gap-y-2 pt-2">
+                  <div className="flex items-center gap-2 text-sm text-muted-foreground">
+                    <GraduationCap className="size-4 text-primary/60" />
+                    <span>{t("education")} · {t("major")}</span>
+                  </div>
+                  <div className="flex items-center gap-2 text-sm text-muted-foreground">
+                    <Award className="size-4 text-primary/60" />
+                    <span>Apple Developer Academy 2026</span>
+                  </div>
+                  <div className="flex items-center gap-2 text-sm text-muted-foreground">
+                    <MapPin className="size-4 text-primary/60" />
+                    <span>Indonesia</span>
+                  </div>
                 </div>
 
                 <Button
                   onClick={handleCVDownload}
-                  size="lg"
-                  className="mt-6 group"
+                  variant="outline"
+                  size="sm"
+                  className="mt-2"
                 >
-                  <Download className="mr-2 h-4 w-4 group-hover:translate-y-1 transition-transform" />
+                  <Download className="mr-2 size-3.5" />
                   {t("downloadCV")}
                 </Button>
               </div>

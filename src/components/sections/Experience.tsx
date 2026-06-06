@@ -11,14 +11,12 @@ const container = {
   hidden: { opacity: 0 },
   show: {
     opacity: 1,
-    transition: {
-      staggerChildren: 0.1,
-    },
+    transition: { staggerChildren: 0.1 },
   },
 };
 
 const item = {
-  hidden: { opacity: 0, y: 20 },
+  hidden: { opacity: 0, y: 16 },
   show: { opacity: 1, y: 0 },
 };
 
@@ -37,7 +35,6 @@ export function Experience() {
   const calculateDuration = (start: string, end?: string) => {
     const startDate = new Date(start + "-01");
     const endDate = end ? new Date(end + "-01") : new Date();
-
     const months =
       (endDate.getFullYear() - startDate.getFullYear()) * 12 +
       (endDate.getMonth() - startDate.getMonth()) +
@@ -45,17 +42,10 @@ export function Experience() {
 
     const years = Math.floor(months / 12);
     const remainingMonths = months % 12;
-
     const parts = [];
-    if (years > 0) {
-      parts.push(`${years} ${years === 1 ? t("year") : t("years")}`);
-    }
-    if (remainingMonths > 0) {
-      parts.push(
-        `${remainingMonths} ${remainingMonths === 1 ? t("month") : t("months")}`
-      );
-    }
-
+    if (years > 0) parts.push(`${years} ${years === 1 ? t("year") : t("years")}`);
+    if (remainingMonths > 0)
+      parts.push(`${remainingMonths} ${remainingMonths === 1 ? t("month") : t("months")}`);
     return parts.join(` ${t("and")} `);
   };
 
@@ -70,129 +60,107 @@ export function Experience() {
     return types[type]?.[locale] || type;
   };
 
-  if (experiences.length === 0) {
-    return null;
-  }
+  if (experiences.length === 0) return null;
 
   return (
-    <section id="experience" className="py-28 md:py-44">
-      <div className="container px-6 md:px-8">
+    <section id="experience" className="py-20 md:py-28">
+      <div className="container mx-auto px-6">
         <motion.div
           initial="hidden"
           whileInView="show"
-          viewport={{ once: true, amount: 0.2 }}
+          viewport={{ once: true, amount: 0.1 }}
           variants={container}
         >
-          <motion.h2
-            variants={item}
-            className="text-3xl md:text-5xl font-bold text-center mb-12"
-          >
-            {t("title")}
-          </motion.h2>
+          {/* Header */}
+          <motion.div variants={item} className="mb-12">
+            <h2 className="text-3xl md:text-4xl font-bold tracking-tight">
+              {t("title")}
+            </h2>
+            <div className="mt-3 w-12 h-0.5 bg-primary/40" />
+          </motion.div>
 
-          <div className="max-w-4xl mx-auto">
-            <div className="relative">
-              {/* Timeline line */}
-              <div className="absolute left-0 md:left-1/2 top-0 bottom-0 w-0.5 bg-border md:-translate-x-1/2" />
+          <div className="max-w-3xl mx-auto">
+            <div className="relative pl-8 border-l-2 border-border">
+              {experiences.map((exp, index) => (
+                <motion.div
+                  key={exp.id}
+                  variants={item}
+                  className="relative pb-12 last:pb-0"
+                >
+                  {/* Timeline dot */}
+                  <div className="absolute -left-[calc(1rem+5px)] top-1.5 size-3 rounded-full bg-primary border-2 border-background" />
 
-              {/* Experience items */}
-              <div className="space-y-12">
-                {experiences.map((exp, index) => {
-                  const isEven = index % 2 === 0;
-
-                  return (
-                    <motion.div
-                      key={exp.id}
-                      variants={item}
-                      className={`relative flex items-center gap-8 ${
-                        isEven ? "md:flex-row" : "md:flex-row-reverse"
-                      }`}
-                    >
-                      {/* Timeline node */}
-                      <div className="absolute -left-1.5 md:left-1/2 w-4 h-4 bg-primary rounded-full border-4 border-background md:-translate-x-1/2 z-10" />
-
-                      {/* Spacer for desktop alternating layout */}
-                      <div className="hidden md:block md:w-1/2" />
-
-                      {/* Content card */}
-                      <div className="flex-1 ml-8 md:ml-0">
-                        <div className="bg-card border rounded-lg p-6 shadow-lg hover:shadow-xl transition-shadow">
-                          {/* Company logo */}
-                          <div className="flex items-start gap-4 mb-4">
-                            <div className="w-12 h-12 rounded-lg flex items-center justify-center shrink-0 overflow-hidden">
-                              {exp.logo ? (
-                                <Image
-                                  src={exp.logo}
-                                  alt={exp.company[locale]}
-                                  width={48}
-                                  height={48}
-                                  className="w-full h-full object-contain"
-                                />
-                              ) : (
-                                <Briefcase className="w-6 h-6 text-primary" />
-                              )}
-                            </div>
-                            <div className="flex-1">
-                              <h3 className="text-xl font-bold mb-1">
-                                {exp.role[locale]}
-                              </h3>
-                              <p className="text-muted-foreground font-medium">
-                                {exp.company[locale]}
-                              </p>
-                            </div>
-                            {!exp.endDate && (
-                              <Badge variant="default" className="shrink-0">
-                                {t("current")}
-                              </Badge>
-                            )}
-                          </div>
-
-                          {/* Meta information */}
-                          <div className="flex flex-wrap gap-4 mb-4 text-sm text-muted-foreground">
-                            <div className="flex items-center gap-1">
-                              <Calendar className="w-4 h-4" />
-                              <span>
-                                {formatDate(exp.startDate)} -{" "}
-                                {exp.endDate
-                                  ? formatDate(exp.endDate)
-                                  : t("present")}{" "}
-                                ·{" "}
-                                {calculateDuration(exp.startDate, exp.endDate)}
-                              </span>
-                            </div>
-                            <div className="flex items-center gap-1">
-                              <MapPin className="w-4 h-4" />
-                              <span>{exp.location[locale]}</span>
-                            </div>
-                          </div>
-
-                          <div className="mb-4">
-                            <Badge variant="secondary">
-                              {getTypeLabel(exp.type)}
-                            </Badge>
-                          </div>
-
-                          {/* Description */}
-                          <p className="text-muted-foreground mb-4 leading-relaxed text-justify">
-                            {exp.description[locale]}
-                          </p>
-
-                          {/* Technologies */}
-                          {exp.technologies.length > 0 && (
-                            <div className="flex flex-wrap gap-2">
-                              {exp.technologies.map((tech) => (
-                                <Badge key={tech} variant="outline">
-                                  {tech}
-                                </Badge>
-                              ))}
-                            </div>
-                          )}
-                        </div>
+                  <div className="space-y-3">
+                    {/* Header row */}
+                    <div className="flex items-start gap-3">
+                      <div className="size-10 rounded-lg border border-border flex items-center justify-center shrink-0 overflow-hidden bg-muted">
+                        {exp.logo ? (
+                          <Image
+                            src={exp.logo}
+                            alt={exp.company[locale]}
+                            width={40}
+                            height={40}
+                            className="w-full h-full object-contain"
+                          />
+                        ) : (
+                          <Briefcase className="size-5 text-primary/60" />
+                        )}
                       </div>
-                    </motion.div>
-                  );
-                })}
-              </div>
+                      <div className="flex-1 min-w-0">
+                        <h3 className="text-base font-semibold">
+                          {exp.role[locale]}
+                        </h3>
+                        <p className="text-sm text-muted-foreground">
+                          {exp.company[locale]}
+                        </p>
+                      </div>
+                      {!exp.endDate && (
+                        <Badge variant="default" className="shrink-0 text-[10px]">
+                          {t("current")}
+                        </Badge>
+                      )}
+                    </div>
+
+                    {/* Meta */}
+                    <div className="flex flex-wrap gap-x-4 gap-y-1 text-xs text-muted-foreground">
+                      <span className="inline-flex items-center gap-1">
+                        <Calendar className="size-3" />
+                        {formatDate(exp.startDate)} —{" "}
+                        {exp.endDate ? formatDate(exp.endDate) : t("present")}
+                        {" · "}
+                        {calculateDuration(exp.startDate, exp.endDate)}
+                      </span>
+                      <span className="inline-flex items-center gap-1">
+                        <MapPin className="size-3" />
+                        {exp.location[locale]}
+                      </span>
+                      <Badge variant="secondary" className="text-[10px]">
+                        {getTypeLabel(exp.type)}
+                      </Badge>
+                    </div>
+
+                    {/* Description */}
+                    <p className="text-sm text-muted-foreground leading-relaxed">
+                      {exp.description[locale]}
+                    </p>
+
+                    {/* Tech */}
+                    {exp.technologies.length > 0 && (
+                      <div className="flex flex-wrap gap-1.5">
+                        {exp.technologies.map((tech) => (
+                          <Badge
+                            key={tech}
+                            variant="outline"
+                            className="text-[10px] font-normal border-border/50"
+                          >
+                            {tech}
+                          </Badge>
+                        ))}
+                      </div>
+                    )}
+                  </div>
+                </motion.div>
+              ))}
             </div>
           </div>
         </motion.div>

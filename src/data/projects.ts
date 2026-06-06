@@ -422,4 +422,73 @@ export const projects: Project[] = [
       en: "Python and OpenCV were chosen for the mature and reliable computer vision library ecosystem.",
     },
   },
+  {
+    id: "lms-praktikum",
+    title: {
+      id: "LMS Praktikum Algoritma & Struktur Data",
+      en: "LMS - Algorithms & Data Structures Lab",
+    },
+    description: {
+      id: "Platform praktikum berbasis web untuk mata kuliah Algoritma & Struktur Data dengan AI Assistant, live code execution, dan multi-tenant dashboard.",
+      en: "Web-based lab platform for Algorithms & Data Structures course featuring AI Assistant, live code execution, and multi-tenant dashboard.",
+    },
+    longDescription: {
+      id: "Platform praktikum berbasis web (LMS) untuk mata kuliah Algoritma dan Struktur Data di ITERA. Mahasiswa dapat membaca materi interaktif (MDX), mengerjakan latihan coding C/C++ langsung di browser dengan Monaco Editor, dan dibimbing oleh AI Senior Lab Assistant (RAG-based Google Gemini) yang memberikan hint logika bukan jawaban jadi. Dilengkapi multi-tenant dashboard untuk admin mengelola absensi, deadline, dan nilai per kelas (RA-RE), serta AI Analytics & Audit untuk heatmap kesulitan mahasiswa dan transparansi percakapan AI. Menggunakan Next.js 16, Supabase (Postgres + pgvector untuk RAG), Drizzle ORM, dan Vercel AI SDK.",
+      en: "Web-based lab platform (LMS) for Algorithms & Data Structures course at ITERA. Students can read interactive MDX content, write and execute C/C++ code directly in the browser using Monaco Editor, and receive guidance from an AI Senior Lab Assistant (RAG-based Google Gemini) that provides logic hints rather than direct answers. Features a multi-tenant admin dashboard for managing attendance, deadlines, and grades per class (RA-RE), plus AI Analytics & Audit for student difficulty heatmaps and AI conversation transparency. Built with Next.js 16, Supabase (Postgres + pgvector for RAG), Drizzle ORM, and Vercel AI SDK.",
+    },
+    image: "/projects/lms-praktikum.webp",
+    screenshots: ["/projects/lms-praktikum.webp"],
+    technologies: [
+      "Next.js",
+      "React",
+      "TypeScript",
+      "Supabase",
+      "PostgreSQL",
+      "Google Gemini",
+      "Tailwind CSS",
+      "Drizzle ORM",
+    ],
+    githubUrl: "https://github.com/falihdzakwanz/praktikum-algoritma-struktur-data",
+    featured: true,
+    category: "fullstack",
+    date: "2026-02-01",
+    role: {
+      id: "Fullstack Developer & AI Engineer",
+      en: "Fullstack Developer & AI Engineer",
+    },
+    impact: {
+      id: "Meningkatkan efektivitas pembelajaran coding dengan bimbingan AI real-time yang membantu 100+ mahasiswa ITERA.",
+      en: "Improved coding learning effectiveness with real-time AI guidance, serving 100+ ITERA students.",
+    },
+    features: [
+      {
+        id: "AI Senior Lab Assistant berbasis RAG dengan Google Gemini",
+        en: "RAG-based AI Senior Lab Assistant powered by Google Gemini",
+      },
+      {
+        id: "Live code execution via Monaco Editor + Wandbox API",
+        en: "Live code execution via Monaco Editor + Wandbox API",
+      },
+      {
+        id: "Multi-tenant dashboard untuk admin kelas",
+        en: "Multi-tenant dashboard for class administration",
+      },
+      {
+        id: "Heatmap kesulitan & audit trail AI",
+        en: "Difficulty heatmap & AI audit trail",
+      },
+    ],
+    challenge: {
+      id: "Mengintegrasikan RAG dengan materi kurikulum yang dinamis (MDX) agar AI memberikan konteks yang relevan sesuai topik yang sedang dipelajari mahasiswa.",
+      en: "Integrating RAG with dynamic MDX curriculum content so the AI provides contextually relevant guidance based on the topic the student is currently studying.",
+    },
+    solution: {
+      id: "Mengimplementasikan pipeline ingest otomatis dari file MDX ke pgvector, dengan chunking berbasis struktur frontmatter dan sliding window untuk konteks percakapan.",
+      en: "Implemented an automated ingest pipeline from MDX files to pgvector, with frontmatter-based chunking and sliding window for conversation context.",
+    },
+    techRationale: {
+      id: "Next.js 16 + Supabase + Drizzle ORM memberikan performa tinggi dan developer experience yang optimal untuk aplikasi LMS real-time yang kompleks.",
+      en: "Next.js 16 + Supabase + Drizzle ORM provides high performance and optimal developer experience for a complex real-time LMS application.",
+    },
+  },
 ];

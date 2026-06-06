@@ -9,8 +9,8 @@
   "hero": {
     "greeting": "Hi, I'm",
     "name": "Falih Dzakwan Zuhdi",
-    "title": "Fullstack Developer",
-    "bio": "Transforming ideas into digital reality. I craft web applications that are not only beautiful, but also powerful and efficient. Have a vision for your project? Let's bring it to life together.",
+    "title": "Fullstack + AI Developer",
+    "bio": "I build fullstack web applications and AI-powered systems. From real-time face recognition attendance to AI-assisted LMS platforms — I turn complex ideas into production-ready software.",
     "viewProjects": "View Projects",
     "downloadCV": "Download CV",
     "contactMe": "Contact Me"
@@ -45,6 +45,7 @@
       "frontend": "Frontend",
       "backend": "Backend",
       "database": "Database",
+      "ai_ml": "AI / ML",
       "tools": "Tools & Platform"
     }
   },
@@ -58,9 +59,14 @@
     "years": "years",
     "and": "and"
   },
+  "stats": {
+    "projectsBuilt": "Projects",
+    "expertise": "Expertise",
+    "yearsExp": "Years Experience"
+  },
   "contact": {
-    "title": "Let's Connect",
-    "description": "Have an interesting project or want to collaborate? Feel free to reach out!",
+    "title": "Let's Work Together",
+    "description": "Interested in working together or have a project in mind? Reach out and let's build something great.",
     "form": {
       "name": "Name",
       "namePlaceholder": "John Doe",
@@ -68,7 +74,7 @@
       "emailPlaceholder": "johndoe@example.com",
       "message": "Message",
       "messagePlaceholder": "Tell me about your project or idea...",
-      "submit": "Send Message",
+      "submit": "Hire Me",
       "sending": "Sending..."
     },
     "success": "Message sent successfully! I'll get back to you soon.",

@@ -1,8 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
 import { useTranslations } from "next-intl";
-import { useTheme } from "next-themes";
 import { motion } from "framer-motion";
 import { techStack } from "@/data/tech-stack";
 import * as SimpleIcons from "simple-icons";
@@ -11,114 +9,89 @@ const container = {
   hidden: { opacity: 0 },
   show: {
     opacity: 1,
-    transition: {
-      staggerChildren: 0.05,
-    },
+    transition: { staggerChildren: 0.05 },
   },
 };
 
 const item = {
-  hidden: { opacity: 0, scale: 0.8 },
-  show: {
-    opacity: 1,
-    scale: 1,
-    transition: {
-      type: "spring" as const,
-      stiffness: 100,
-    },
-  },
+  hidden: { opacity: 0, y: 12 },
+  show: { opacity: 1, y: 0 },
 };
+
+const CATEGORIES = [
+  { key: "frontend" as const, names: ["Next.js", "React", "TypeScript", "JavaScript", "Tailwind CSS", "HTML5", "CSS3", "Framer Motion"] },
+  { key: "backend" as const, names: ["Laravel", "Express.js", "Node.js", "Firebase", "PHP"] },
+  { key: "database" as const, names: ["MySQL", "PostgreSQL", "Firestore"] },
+  { key: "ai_ml" as const, names: ["Python", "TensorFlow", "PyTorch", "OpenCV"] },
+  { key: "tools" as const, names: ["Git", "Docker", "Linux", "Vercel", "Figma"] },
+];
+
+function getSiIcon(iconSlug: string) {
+  const key = `si${iconSlug.charAt(0).toUpperCase()}${iconSlug.slice(1)}`;
+  const icon = (SimpleIcons as Record<string, { path: string; hex: string }>)[key];
+  return icon;
+}
 
 export function Skills() {
   const t = useTranslations("skills");
-  const { theme, resolvedTheme } = useTheme();
-  const [mounted, setMounted] = useState(false);
-
-  useEffect(() => {
-    const timer = setTimeout(() => setMounted(true), 0);
-    return () => clearTimeout(timer);
-  }, []);
-
-  // Function to get appropriate color based on theme
-  const getColor = (originalColor: string) => {
-    // If not mounted yet, return original color to avoid hydration mismatch
-    if (!mounted) {
-      return originalColor;
-    }
-    const currentTheme = resolvedTheme || theme;
-    // If dark mode and color is black, use white instead
-    if (currentTheme === "dark" && originalColor === "#000000") {
-      return "#FFFFFF";
-    }
-    return originalColor;
-  };
 
   return (
-    <section id="skills" className="py-28 md:py-44">
-      <div className="container px-6 md:px-8">
+    <section id="skills" className="py-20 md:py-28 bg-muted/30">
+      <div className="container mx-auto px-6">
         <motion.div
           initial="hidden"
           whileInView="show"
-          viewport={{ once: true, amount: 0.2 }}
+          viewport={{ once: true, amount: 0.1 }}
           variants={container}
         >
-          <motion.h2
-            variants={item}
-            className="text-3xl md:text-5xl font-bold text-center mb-12"
-          >
-            {t("title")}
-          </motion.h2>
+          {/* Header */}
+          <motion.div variants={item} className="mb-10">
+            <h2 className="text-3xl md:text-4xl font-bold tracking-tight">
+              {t("title")}
+            </h2>
+            <div className="mt-3 w-12 h-0.5 bg-primary/40" />
+          </motion.div>
 
-          {/* Tech Badges Grid */}
-          <div className="flex flex-wrap justify-center gap-4 max-w-5xl mx-auto">
-            {techStack.map((tech) => {
-              const iconSlug = `si${tech.icon
-                .charAt(0)
-                .toUpperCase()}${tech.icon.slice(1)}`;
-              const icon = (SimpleIcons as Record<string, { path: string }>)[iconSlug];
-              const displayColor = getColor(tech.color);
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4">
+            {CATEGORIES.map((cat) => {
+              const catTechs = cat.names
+                .map((name) => techStack.find((t) => t.name === name))
+                .filter((t): t is (typeof techStack)[0] => t !== undefined);
 
               return (
                 <motion.div
-                  key={tech.name}
+                  key={cat.key}
                   variants={item}
-                  whileHover={{
-                    scale: 1.1,
-                    y: -5,
-                    transition: { type: "spring", stiffness: 400 },
-                  }}
-                  className="group relative"
+                  className="surface-raised p-4"
                 >
-                  <div
-                    className="flex items-center gap-2 px-4 py-2 rounded-full border-2 shadow-lg hover:shadow-xl transition-all duration-300 cursor-default"
-                    style={{
-                      borderColor: displayColor,
-                      backgroundColor: "hsl(var(--background))",
-                    }}
-                  >
-                    {icon && (
-                      <svg
-                        role="img"
-                        viewBox="0 0 24 24"
-                        className="w-5 h-5 transition-transform group-hover:rotate-12"
-                        style={{ fill: displayColor }}
-                      >
-                        <path d={icon.path} />
-                      </svg>
-                    )}
-                    <span
-                      className="font-semibold text-sm whitespace-nowrap"
-                      style={{ color: displayColor }}
-                    >
-                      {tech.name}
-                    </span>
+                  <h3 className="text-xs font-semibold uppercase tracking-widest text-muted-foreground/60 mb-3">
+                    {t(`categories.${cat.key === 'ai_ml' ? 'ai_ml' : cat.key}`)}
+                  </h3>
+                  <div className="space-y-2.5">
+                    {catTechs.map((tech) => {
+                      const icon = getSiIcon(tech.icon);
+                      return (
+                        <div
+                          key={tech.name}
+                          className="flex items-center gap-2.5"
+                        >
+                          {icon && (
+                            <svg
+                              role="img"
+                              viewBox="0 0 24 24"
+                              className="size-4 shrink-0 opacity-60"
+                              style={{ fill: tech.color }}
+                            >
+                              <path d={icon.path} />
+                            </svg>
+                          )}
+                          <span className="text-sm text-muted-foreground">
+                            {tech.name}
+                          </span>
+                        </div>
+                      );
+                    })}
                   </div>
-
-                  {/* Glow effect on hover */}
-                  <div
-                    className="absolute inset-0 rounded-full blur-xl opacity-0 group-hover:opacity-30 transition-opacity duration-300 -z-10"
-                    style={{ backgroundColor: displayColor }}
-                  />
                 </motion.div>
               );
             })}
