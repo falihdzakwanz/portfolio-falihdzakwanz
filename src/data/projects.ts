@@ -2,66 +2,133 @@ import { Project } from "@/types";
 
 export const projects: Project[] = [
   {
-    id: "visicode",
+    id: "ai-powered-lms",
     title: {
-      id: "VisiCode",
-      en: "VisiCode",
+      id: "AI-Powered LMS",
+      en: "AI-Powered LMS",
     },
     description: {
-      id: "Platform layanan web development yang menawarkan paket pembuatan website mulai dari landing page sederhana hingga aplikasi web lengkap dengan CMS untuk bisnis dan startup.",
-      en: "Web development service platform offering website creation packages from simple landing pages to complete web applications with CMS for businesses and startups.",
+      id: "Platform pembelajaran coding berbasis AI dengan eksekusi kode langsung di browser, asisten virtual RAG, dan dashboard multi-tenant untuk dosen — melayani 100+ mahasiswa.",
+      en: "AI-driven learning platform for coding practicum with live code execution, RAG-based virtual assistant, and multi-tenant instructor dashboards — serving 100+ students.",
     },
     longDescription: {
-      id: "VisiCode adalah platform layanan web development yang saya bangun untuk membantu bisnis dan startup mewujudkan visi digital mereka. Platform ini menawarkan tiga paket utama: Vision Start (landing page, 3-5 hari), Vision Spark (MVP testing, 1-2 minggu), dan Vision Launch (full website dengan CMS, 4-6 minggu). Website dilengkapi dengan sistem Vision Assessment untuk mengkualifikasi klien, showcase packages, blog, FAQ, dan contact form yang terintegrasi dengan email notification. Saya membangun VisiCode dengan Next.js untuk performa optimal, menggunakan Tailwind CSS untuk desain yang clean dan responsive, serta Resend API untuk mengelola komunikasi email otomatis dengan klien. Fokus utama adalah memberikan solusi yang cepat, profesional, dan scalable untuk berbagai kebutuhan bisnis.",
-      en: "VisiCode is a web development service platform I built to help businesses and startups realize their digital vision. The platform offers three main packages: Vision Start (landing page, 3-5 days), Vision Spark (MVP testing, 1-2 weeks), and Vision Launch (full website with CMS, 4-6 weeks). The website is equipped with a Vision Assessment system to qualify clients, package showcase, blog, FAQ, and contact form integrated with email notifications. I built VisiCode with Next.js for optimal performance, using Tailwind CSS for clean and responsive design, and Resend API to manage automated email communication with clients. The main focus is delivering fast, professional, and scalable solutions for various business needs.",
+      id: "Membangun Learning Management System dari scratch untuk praktikum Algoritma & Struktur Data di ITERA. Platform ini memungkinkan mahasiswa membaca materi interaktif (MDX), menulis dan mengeksekusi kode C/C++ langsung di browser via Monaco Editor dan Wandbox API, serta mendapatkan bimbingan dari AI Senior Lab Assistant berbasis RAG (Google Gemini + pgvector) yang memberikan hint logika tanpa memberikan jawaban jadi. Dilengkapi dashboard multi-tenant untuk admin mengelola kelas (RA-RE), absensi, deadline, dan nilai, serta heatmap kesulitan mahasiswa per topik untuk evaluasi asisten. Auto-ingest pipeline MDX ke pgvector dengan chunking berbasis frontmatter dan sliding window. Dirancang dengan arsitektur modular yang memisahkan modul AI, konten, dan asesmen secara clean.",
+      en: "Built a Learning Management System from scratch for the Data Structures & Algorithms practicum at ITERA. The platform enables students to read interactive MDX content, write and execute C/C++ code directly in the browser via Monaco Editor and Wandbox API, and receive guidance from a RAG-based AI Senior Lab Assistant (Google Gemini + pgvector) that provides logic hints without giving away answers. Features a multi-tenant dashboard for admins to manage classes (RA-RE), attendance, deadlines, and grades, plus student difficulty heatmaps per topic for assistant evaluation. Auto-ingest pipeline from MDX to pgvector with frontmatter-based chunking and sliding window. Designed with a modular architecture that cleanly separates AI, content, and assessment modules.",
     },
-    image: "/projects/visicode.webp",
-    screenshots: ["/projects/visicode.webp"],
+    image: "/projects/ai-lms.webp",
+    screenshots: ["/projects/ai-lms.webp"],
     technologies: [
       "Next.js",
       "React",
       "TypeScript",
       "Tailwind CSS",
-      "Framer Motion",
-      "Resend",
+      "Supabase",
+      "Google Gemini",
+      "Vercel AI SDK",
+      "Wandbox API",
+      "Drizzle ORM",
     ],
-    liveUrl: "https://visicode.vercel.app",
+    liveUrl: "https://algoritma-struktur-data.fdz.web.id",
+    githubUrl: "https://github.com/falihdzakwanz/praktikum-algoritma-struktur-data",
     featured: true,
     category: "fullstack",
-    date: "2025-12-11",
+    date: "2025-09-01",
     role: {
-      id: "Fullstack Developer & Founder",
-      en: "Fullstack Developer & Founder",
+      id: "Fullstack Developer & AI Engineer",
+      en: "Fullstack Developer & AI Engineer",
     },
     impact: {
-      id: "Membantu UMKM dan startup memiliki kehadiran digital profesional dengan sistem kualifikasi klien otomatis.",
-      en: "Helping SMEs and startups establish a professional digital presence with an automated client qualification system.",
+      id: "Membantu 100+ mahasiswa belajar algoritma dan struktur data dengan latihan coding interaktif dan bimbingan AI yang adaptif.",
+      en: "Helping 100+ students learn data structures and algorithms through interactive coding exercises and adaptive AI guidance.",
     },
     features: [
       {
-        id: "Vision Assessment System untuk kualifikasi klien",
-        en: "Vision Assessment System for client qualification",
+        id: "AI Senior Lab Assistant berbasis RAG yang memberikan hint logika, bukan jawaban",
+        en: "RAG-based AI Senior Lab Assistant providing logic hints, not answers",
       },
       {
-        id: "Integrasi notifikasi email otomatis via Resend",
-        en: "Automated email notification integration via Resend",
+        id: "Live code editor (Monaco) dengan eksekusi C/C++ via Wandbox API",
+        en: "Live code editor (Monaco) with C/C++ execution via Wandbox API",
       },
       {
-        id: "Showcase paket layanan yang dinamis",
-        en: "Dynamic service package showcase",
+        id: "Dashboard multi-tenant dengan heatmap kesulitan dan analytics real-time",
+        en: "Multi-tenant dashboard with difficulty heatmaps and real-time analytics",
       },
     ],
     challenge: {
-      id: "Membangun sistem asesmen yang intuitif namun mampu mengumpulkan data teknis yang cukup dari klien non-teknis.",
-      en: "Building an intuitive assessment system capable of gathering sufficient technical data from non-technical clients.",
+      id: "Membangun RAG pipeline yang akurat secara kontekstual dengan materi perkuliahan dalam bahasa Indonesia, serta memastikan AI memberikan hint yang mendorong pemikiran kritis bukan spoon-feeding.",
+      en: "Building an RAG pipeline that is contextually accurate with Indonesian lecture materials, while ensuring the AI provides hints that encourage critical thinking rather than spoon-feeding.",
     },
     solution: {
-      id: "Mengimplementasikan multi-step form dengan logika kondisional dan bahasa yang mudah dipahami.",
-      en: "Implemented a multi-step form with conditional logic and user-friendly language.",
+      id: "Mengimplementasikan auto-ingest MDX dengan chunking cerdas (frontmatter + sliding window) ke pgvector, dan merancang prompt system yang ketat untuk memastikan AI hanya memberikan arahan logis.",
+      en: "Implemented auto-ingest MDX pipeline with intelligent chunking (frontmatter + sliding window) into pgvector, and designed strict system prompts to ensure the AI only provides logical guidance.",
     },
     techRationale: {
-      id: "Next.js dipilih untuk kecepatan loading (LCP) dan integrasi seamless dengan ekosistem Vercel.",
-      en: "Next.js was chosen for fast loading speeds (LCP) and seamless integration with the Vercel ecosystem.",
+      id: "Next.js 16 dipilih untuk App Router + SSR performance, Supabase untuk managed Postgres + pgvector (RAG vector search), dan Vercel AI SDK untuk integrasi Google Gemini yang seamless.",
+      en: "Next.js 16 was chosen for App Router and SSR performance, Supabase for managed Postgres with pgvector (RAG vector search), and Vercel AI SDK for seamless Google Gemini integration.",
+    },
+  },
+  {
+    id: "harmony-fti",
+    title: {
+      id: "Harmony FTI",
+      en: "Harmony FTI",
+    },
+    description: {
+      id: "Platform digital arsiparis persuratan program studi yang menggantikan alur kerja terfragmentasi — memotong waktu pemrosesan 57% melalui tanda tangan elektronik dan workflow approval multi-level.",
+      en: "Unified digital document archiving platform that replaced fragmented workflows — cutting processing time by 57% through electronic signature automation and multi-level approval workflows.",
+    },
+    longDescription: {
+      id: "Memimpin tim 3 orang untuk merombak alur dokumen administrasi yang berserakan di Google Forms, spreadsheet, WhatsApp, dan tanda tangan kertas menjadi satu platform digital terpadu untuk Fakultas Teknologi Industri ITERA. Mengintegrasikan Digisign (BSrE) untuk tanda tangan elektronik otomatis via arsitektur webhook, workflow approval multi-level, dan sistem arsip digital terpusat. Berhasil memproses 219 dokumen (188 terproses) dalam 4.5 bulan dengan metodologi RUP dan Kanban. Tervalidasi melalui UAT berbasis ISO 25010 dengan skor kepuasan 91.3% dari 111 responden.",
+      en: "Led a 3-person team to overhaul fragmented document workflows scattered across Google Forms, spreadsheets, WhatsApp, and paper signatures into one unified digital platform for the Faculty of Industrial Technology, ITERA. Integrated Digisign (BSrE) for automated electronic signatures via webhook-driven architecture, multi-level approval workflows, and centralized digital archiving. Successfully processed 219 documents (188 completed) in 4.5 months using RUP and Kanban methodologies. Validated through ISO 25010-based UAT with a 91.3% satisfaction score across 111 respondents.",
+    },
+    image: "/projects/harmony.webp",
+    screenshots: ["/projects/harmony.webp"],
+    technologies: [
+      "Laravel",
+      "React",
+      "Inertia.js",
+      "MySQL",
+      "PHP",
+      "Google Drive API",
+      "Twilio API",
+    ],
+    featured: true,
+    category: "fullstack",
+    date: "2025-09-01",
+    role: {
+      id: "Lead Fullstack Developer",
+      en: "Lead Fullstack Developer",
+    },
+    impact: {
+      id: "Memangkas waktu pemrosesan dokumen 57% (7→3 hari) dengan 91.3% kepuasan pengguna — menangani 219 dokumen lintas program studi.",
+      en: "Reduced document processing time by 57% (7→3 days) with 91.3% user satisfaction — handling 219 documents across study programs.",
+    },
+    features: [
+      {
+        id: "Workflow approval multi-level untuk pengajuan surat online",
+        en: "Multi-level approval workflow for online letter submissions",
+      },
+      {
+        id: "Tanda tangan digital otomatis via Digisign BSrE (webhook-driven)",
+        en: "Automated digital signatures via Digisign BSrE (webhook-driven)",
+      },
+      {
+        id: "Arsip digital terpusat dengan tracking disposisi real-time",
+        en: "Centralized digital archive with real-time disposition tracking",
+      },
+    ],
+    challenge: {
+      id: "Mengintegrasikan standar tanda tangan digital pemerintah (Digisign BSrE) ke dalam alur dokumen yang melibatkan banyak pemangku kepentingan dengan tingkat literasi digital yang berbeda-beda.",
+      en: "Integrating government digital signature standards (Digisign BSrE) into document workflows involving multiple stakeholders with varying levels of digital literacy.",
+    },
+    solution: {
+      id: "Merancang arsitektur webhook-driven yang memisahkan proses signing dari antarmuka pengguna, serta menerapkan notifikasi otomatis (email & WhatsApp) untuk memandu pengguna melewati setiap tahap.",
+      en: "Designed a webhook-driven architecture that decouples the signing process from the user interface, and implemented automated notifications (email & WhatsApp) to guide users through each stage.",
+    },
+    techRationale: {
+      id: "Laravel dipilih untuk enterprise stability dan ekosistem yang matang, Inertia.js untuk menghubungkan React frontend dengan Laravel backend tanpa perlu API terpisah, dan Digisign API untuk kepatuhan terhadap standar tanda tangan elektronik pemerintah.",
+      en: "Laravel was chosen for enterprise stability and a mature ecosystem, Inertia.js to bridge React frontend with Laravel backend without a separate API layer, and Digisign API for compliance with government electronic signature standards.",
     },
   },
   {
