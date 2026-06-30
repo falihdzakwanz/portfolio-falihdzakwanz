@@ -10,7 +10,7 @@
     "greeting": "Halo, saya",
     "name": "Falih Dzakwan Zuhdi",
     "title": "Fullstack Developer",
-    "bio": "Mengubah ide menjadi kenyataan digital. Saya menciptakan aplikasi web yang tidak hanya indah, tetapi juga powerful dan efisien. Punya visi untuk project Anda? Mari kita wujudkan bersama.",
+    "bio": "Mengubah ide menjadi realita digital. Saya membuat aplikasi web yang tidak hanya indah, tetapi juga kuat dan efisien. Punya visi untuk proyek Anda? Mari kita wujudkan bersama.",
     "viewProjects": "Lihat Proyek",
     "downloadCV": "Unduh CV",
     "contactMe": "Hubungi Saya"
@@ -19,28 +19,48 @@
     "title": "Tentang Saya",
     "name": "Falih Dzakwan Zuhdi",
     "role": "Fullstack Developer",
-    "bio": "Saya adalah Fullstack Developer yang berspesialisasi dalam ekosistem Next.js, mengintegrasikan frontend modern dengan backend yang robust. Saya fokus merancang aplikasi web yang efisien, aman, dan user-friendly. Punya ide project menarik? Mari wujudkan bersama!",
+    "bio": "Saya seorang Fullstack Developer yang berspesialisasi di ekosistem Next.js, menggabungkan frontend modern dengan solusi backend yang tangguh. Saya fokus membangun aplikasi web yang efisien, aman, dan ramah pengguna. Punya ide proyek menarik? Mari kita wujudkan bersama!",
     "education": "Institut Teknologi Sumatera",
     "major": "Teknik Informatika",
-    "downloadCV": "Unduh CV"
+    "downloadCV": "Unduh CV",
+    "stats": {
+      "projects": "Proyek Dibangun",
+      "experience": "Tahun Pengalaman",
+      "technologies": "Teknologi",
+      "certifications": "Sertifikasi"
+    },
+    "whatIDo": "Apa yang Saya Lakukan",
+    "whatIDoDesc1": "Saya membangun aplikasi web full-stack menggunakan framework modern seperti Next.js dan Laravel, memastikan pengalaman pengguna yang responsif, cepat, dan mudah diakses.",
+    "whatIDoDesc2": "Saya merancang dan mengimplementasikan RESTful API, arsitektur database, dan logika server-side yang dapat diskalakan dengan kebutuhan bisnis Anda.",
+    "whatIDoDesc3": "Saya mengubah desain menjadi antarmuka yang sempurna dengan animasi halus dan mikro-interaksi yang memanjakan pengguna.",
+    "frontendDev": "Frontend Development",
+    "backendDev": "Backend Development",
+    "uiDesign": "UI/UX Design"
   },
   "projects": {
     "title": "Proyek Saya",
     "featured": "Unggulan",
-    "viewLive": "Lihat Live",
-    "viewCode": "Lihat Code",
+    "viewLive": "Lihat Langsung",
+    "viewCode": "Lihat Kode",
     "allProjects": "Semua Proyek",
     "role": "Peran",
     "impact": "Dampak",
-    "challenge": "Tantangan Teknis",
+    "challenge": "Tantangan",
     "solution": "Solusi",
-    "techRationale": "Rasional Teknis",
+    "techRationale": "Alasan Teknis",
     "features": "Fitur Utama",
     "viewDetails": "Lihat Detail",
-    "screenshots": "Galeri Proyek"
+    "screenshots": "Galeri Proyek",
+    "filterAll": "Semua",
+    "filterWeb": "Web",
+    "filterFullstack": "Fullstack",
+    "filterMobile": "Mobile",
+    "filterGame": "Game",
+    "filterOther": "Lainnya"
   },
   "skills": {
     "title": "Keahlian & Teknologi",
+    "proficiency": "Tingkat Kemahiran",
     "categories": {
       "frontend": "Frontend",
       "backend": "Backend",
@@ -50,35 +70,46 @@
   },
   "experience": {
     "title": "Pengalaman Kerja",
-    "current": "Saat Ini",
+    "current": "Sekarang",
     "present": "Sekarang",
     "month": "bulan",
     "months": "bulan",
     "year": "tahun",
     "years": "tahun",
-    "and": "dan"
+    "and": "dan",
+    "achievements": "Pencapaian"
   },
   "contact": {
     "title": "Mari Terhubung",
     "description": "Punya proyek menarik atau ingin berkolaborasi? Jangan ragu untuk menghubungi saya!",
+    "infoTitle": "Informasi Kontak",
+    "infoDesc": "Saya selalu terbuka untuk mendiskusikan proyek baru, ide kreatif, atau kesempatan untuk menjadi bagian dari visi Anda.",
+    "email": "Email",
+    "location": "Lampung, Indonesia",
+    "social": "Sosial",
+    "available": "Tersedia untuk peluang",
+    "responseTime": "Biasanya merespon dalam 24 jam",
     "form": {
       "name": "Nama",
-      "namePlaceholder": "John Doe",
+      "namePlaceholder": "Nama Anda",
       "email": "Email",
-      "emailPlaceholder": "johndoe@example.com",
+      "emailPlaceholder": "email@anda.com",
       "message": "Pesan",
       "messagePlaceholder": "Ceritakan tentang proyek atau ide Anda...",
       "submit": "Kirim Pesan",
       "sending": "Mengirim..."
     },
-    "success": "Pesan berhasil dikirim! Saya akan segera menghubungi Anda.",
+    "success": "Pesan berhasil dikirim! Saya akan menghubungi Anda segera.",
     "error": "Terjadi kesalahan. Silakan coba lagi.",
     "rateLimit": "Terlalu banyak permintaan. Silakan coba lagi nanti."
   },
   "footer": {
     "rights": "Hak Cipta Dilindungi",
     "madeWith": "Dibuat dengan",
-    "by": "oleh"
+    "by": "oleh",
+    "backToTop": "Kembali ke Atas",
+    "quickLinks": "Tautan Cepat",
+    "connect": "Terhubung"
   },
   "errors": {
     "nameRequired": "Nama wajib diisi",

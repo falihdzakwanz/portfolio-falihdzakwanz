@@ -3,16 +3,16 @@
 import Image from "next/image";
 import { useTranslations, useLocale } from "next-intl";
 import { motion } from "framer-motion";
-import { Briefcase, MapPin, Calendar } from "lucide-react";
+import { Briefcase, MapPin, Calendar, Target, Star } from "lucide-react";
 import { experiences } from "@/data/experience";
-import { Badge } from "@/components/ui/badge";
+import { formatDate, getDuration } from "@/lib/utils";
 
 const container = {
   hidden: { opacity: 0 },
   show: {
     opacity: 1,
     transition: {
-      staggerChildren: 0.1,
+      staggerChildren: 0.15,
     },
   },
 };
@@ -22,61 +22,40 @@ const item = {
   show: { opacity: 1, y: 0 },
 };
 
+function TimelineLine() {
+  return (
+    <div className="absolute left-8 top-0 bottom-0 w-[2px] bg-gradient-to-b from-primary via-primary/30 to-transparent" />
+  );
+}
+
+function DurationBadge({ duration }: { duration: string }) {
+  return (
+    <span className="inline-flex items-center gap-1 text-[11px] font-bold uppercase tracking-widest text-primary bg-primary/10 px-2 py-1 rounded-full">
+                      <Calendar className="w-3 h-3" />
+                      {duration}
+                    </span>
+  );
+}
+
+function AchievementTag({ achievement }: { achievement: string }) {
+  return (
+    <li className="flex items-start gap-2 text-sm">
+      <Star className="w-3.5 h-3.5 text-primary mt-0.5 shrink-0" />
+      <span className="text-muted-foreground">{achievement}</span>
+    </li>
+  );
+}
+
 export function Experience() {
   const t = useTranslations("experience");
-  const locale = useLocale() as "id" | "en";
-
-  const formatDate = (dateString: string) => {
-    const date = new Date(dateString + "-01");
-    return date.toLocaleDateString(locale === "id" ? "id-ID" : "en-US", {
-      month: "short",
-      year: "numeric",
-    });
-  };
-
-  const calculateDuration = (start: string, end?: string) => {
-    const startDate = new Date(start + "-01");
-    const endDate = end ? new Date(end + "-01") : new Date();
-
-    const months =
-      (endDate.getFullYear() - startDate.getFullYear()) * 12 +
-      (endDate.getMonth() - startDate.getMonth()) +
-      1;
-
-    const years = Math.floor(months / 12);
-    const remainingMonths = months % 12;
-
-    const parts = [];
-    if (years > 0) {
-      parts.push(`${years} ${years === 1 ? t("year") : t("years")}`);
-    }
-    if (remainingMonths > 0) {
-      parts.push(
-        `${remainingMonths} ${remainingMonths === 1 ? t("month") : t("months")}`
-      );
-    }
-
-    return parts.join(` ${t("and")} `);
-  };
-
-  const getTypeLabel = (type: string) => {
-    const types: Record<string, { id: string; en: string }> = {
-      fulltime: { id: "Penuh Waktu", en: "Full-time" },
-      parttime: { id: "Paruh Waktu", en: "Part-time" },
-      contract: { id: "Kontrak", en: "Contract" },
-      freelance: { id: "Freelance", en: "Freelance" },
-      internship: { id: "Magang", en: "Internship" },
-    };
-    return types[type]?.[locale] || type;
-  };
-
-  if (experiences.length === 0) {
-    return null;
-  }
+  const locale = useLocale();
 
   return (
-    <section id="experience" className="py-28 md:py-44">
-      <div className="container px-6 md:px-8">
+    <section id="experience" className="py-28 md:py-44 relative">
+      {/* Background decoration */}
+      <div className="absolute top-1/2 -right-40 w-96 h-96 bg-primary/5 rounded-full blur-3xl" />
+
+      <div className="container px-6 md:px-8 relative">
         <motion.div
           initial="hidden"
           whileInView="show"
@@ -85,116 +64,113 @@ export function Experience() {
         >
           <motion.h2
             variants={item}
-            className="text-3xl md:text-5xl font-bold text-center mb-12"
+            className="text-3xl md:text-5xl font-bold text-center mb-16"
           >
             {t("title")}
           </motion.h2>
 
-          <div className="max-w-4xl mx-auto">
-            <div className="relative">
-              {/* Timeline line */}
-              <div className="absolute left-0 md:left-1/2 top-0 bottom-0 w-0.5 bg-border md:-translate-x-1/2" />
+          <motion.div variants={item} className="max-w-3xl mx-auto relative">
+            <TimelineLine />
 
-              {/* Experience items */}
-              <div className="space-y-12">
-                {experiences.map((exp, index) => {
-                  const isEven = index % 2 === 0;
+            <div className="space-y-12">
+              {experiences.map((exp, index) => {
+                const duration = getDuration(
+                  exp.startDate,
+                  exp.endDate,
+                  locale as "id" | "en",
+                  t
+                );
+                const achievements = exp.achievements?.[locale as "id" | "en"];
 
-                  return (
-                    <motion.div
-                      key={exp.id}
-                      variants={item}
-                      className={`relative flex items-center gap-8 ${
-                        isEven ? "md:flex-row" : "md:flex-row-reverse"
-                      }`}
-                    >
-                      {/* Timeline node */}
-                      <div className="absolute -left-1.5 md:left-1/2 w-4 h-4 bg-primary rounded-full border-4 border-background md:-translate-x-1/2 z-10" />
+                return (
+                  <motion.div
+                    key={index}
+                    variants={item}
+                    className="relative pl-20"
+                  >
+                    {/* Timeline Dot */}
+                    <div className="absolute left-[26px] top-1 w-4 h-4 rounded-full bg-primary border-4 border-background z-10" />
 
-                      {/* Spacer for desktop alternating layout */}
-                      <div className="hidden md:block md:w-1/2" />
+                    {/* Card */}
+                    <div className="bg-card border rounded-xl p-6 relative overflow-hidden group hover:shadow-lg transition-all duration-300">
+                      {/* Gradient accent bar on left */}
+                      <div className="absolute left-0 top-0 bottom-0 w-[3px] bg-gradient-to-b from-primary to-primary/30" />
 
-                      {/* Content card */}
-                      <div className="flex-1 ml-8 md:ml-0">
-                        <div className="bg-card border rounded-lg p-6 shadow-lg hover:shadow-xl transition-shadow">
-                          {/* Company logo */}
-                          <div className="flex items-start gap-4 mb-4">
-                            <div className="w-12 h-12 rounded-lg flex items-center justify-center shrink-0 overflow-hidden">
-                              {exp.logo ? (
-                                <Image
-                                  src={exp.logo}
-                                  alt={exp.company[locale]}
-                                  width={48}
-                                  height={48}
-                                  className="w-full h-full object-contain"
-                                />
-                              ) : (
-                                <Briefcase className="w-6 h-6 text-primary" />
+                      <div className="space-y-4">
+                        {/* Header */}
+                        <div className="flex items-start justify-between flex-wrap gap-3">
+                          <div>
+                            <div className="flex items-center gap-2 flex-wrap mb-1">
+                              <h3 className="text-xl font-bold">
+                                {exp.company[locale as "id" | "en"]}
+                              </h3>
+                              {exp.isCurrent && (
+                                <span className="inline-flex items-center gap-1 text-[10px] font-bold uppercase tracking-widest bg-green-500/10 text-green-600 dark:text-green-400 px-2 py-0.5 rounded-full border border-green-500/20">
+                                  <span className="w-1.5 h-1.5 rounded-full bg-green-500 animate-pulse" />
+                                  {t("current")}
+                                </span>
                               )}
                             </div>
-                            <div className="flex-1">
-                              <h3 className="text-xl font-bold mb-1">
-                                {exp.role[locale]}
-                              </h3>
-                              <p className="text-muted-foreground font-medium">
-                                {exp.company[locale]}
-                              </p>
-                            </div>
-                            {!exp.endDate && (
-                              <Badge variant="default" className="shrink-0">
-                                {t("current")}
-                              </Badge>
-                            )}
+                            <p className="text-base font-medium text-primary">
+                              {exp.position[locale as "id" | "en"]}
+                            </p>
                           </div>
-
-                          {/* Meta information */}
-                          <div className="flex flex-wrap gap-4 mb-4 text-sm text-muted-foreground">
-                            <div className="flex items-center gap-1">
-                              <Calendar className="w-4 h-4" />
-                              <span>
-                                {formatDate(exp.startDate)} -{" "}
-                                {exp.endDate
-                                  ? formatDate(exp.endDate)
-                                  : t("present")}{" "}
-                                ·{" "}
-                                {calculateDuration(exp.startDate, exp.endDate)}
-                              </span>
-                            </div>
-                            <div className="flex items-center gap-1">
-                              <MapPin className="w-4 h-4" />
-                              <span>{exp.location[locale]}</span>
-                            </div>
-                          </div>
-
-                          <div className="mb-4">
-                            <Badge variant="secondary">
-                              {getTypeLabel(exp.type)}
-                            </Badge>
-                          </div>
-
-                          {/* Description */}
-                          <p className="text-muted-foreground mb-4 leading-relaxed text-justify">
-                            {exp.description[locale]}
-                          </p>
-
-                          {/* Technologies */}
-                          {exp.technologies.length > 0 && (
-                            <div className="flex flex-wrap gap-2">
-                              {exp.technologies.map((tech) => (
-                                <Badge key={tech} variant="outline">
-                                  {tech}
-                                </Badge>
-                              ))}
-                            </div>
-                          )}
+                          <DurationBadge duration={duration} />
                         </div>
+
+                        {/* Meta */}
+                        <div className="flex flex-wrap gap-4 text-xs text-muted-foreground">
+                          <span className="flex items-center gap-1.5">
+                            <MapPin className="w-3.5 h-3.5" />
+                            {exp.location[locale as "id" | "en"]}
+                          </span>
+                          <span className="flex items-center gap-1.5">
+                            <Briefcase className="w-3.5 h-3.5" />
+                            {exp.type[locale as "id" | "en"]}
+                          </span>
+                        </div>
+
+                        {/* Description */}
+                        <p className="text-sm text-muted-foreground leading-relaxed">
+                          {exp.description[locale as "id" | "en"]}
+                        </p>
+
+                        {/* Achievements */}
+                        {achievements && achievements.length > 0 && (
+                          <div className="pt-2">
+                            <p className="text-xs font-bold uppercase tracking-wider text-muted-foreground mb-2 flex items-center gap-1.5">
+                              <Target className="w-3 h-3" />
+                              {t("achievements")}
+                            </p>
+                            <ul className="space-y-1.5">
+                              {achievements.map((achievement, i) => (
+                                <AchievementTag
+                                  key={i}
+                                  achievement={achievement}
+                                />
+                              ))}
+                            </ul>
+                          </div>
+                        )}
+
+                        {/* Logo */}
+                        {exp.logo && (
+                          <div className="absolute top-6 right-6 w-10 h-10 rounded-lg overflow-hidden opacity-10 group-hover:opacity-20 transition-opacity">
+                            <Image
+                              src={exp.logo}
+                              alt={exp.company[locale as "id" | "en"]}
+                              fill
+                              className="object-contain"
+                            />
+                          </div>
+                        )}
                       </div>
-                    </motion.div>
-                  );
-                })}
-              </div>
+                    </div>
+                  </motion.div>
+                );
+              })}
             </div>
-          </div>
+          </motion.div>
         </motion.div>
       </div>
     </section>
